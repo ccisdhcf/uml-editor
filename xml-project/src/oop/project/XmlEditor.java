@@ -82,10 +82,6 @@ public class XmlEditor {
 		JButton useCaseButton = new JButton("use case");
 		panel.add(useCaseButton);
 		
-		Canvas canvas = new Canvas();
-		canvas.setBackground(Color.BLACK);
-		frame.getContentPane().add(canvas, BorderLayout.CENTER);
-		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
@@ -107,6 +103,9 @@ public class XmlEditor {
 		object.buttonList.add(compositionLineButton);
 		object.buttonList.add(classButton);
 		object.buttonList.add(useCaseButton);
+		
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		for (JButton buttonSelected:object.buttonList) {
 			buttonSelected.addActionListener(new ActionListener() {
 				
@@ -125,6 +124,7 @@ public class XmlEditor {
 			});
 			
 		}
+		MouseEvent mE = new MouseEvent();
 	}
 
 }
