@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import oop.project.object.buttonModeEnum;
+
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import java.awt.Canvas;
@@ -12,12 +15,10 @@ import javax.swing.Box;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import oop.project.object;
+
 
 public class XmlEditor {
 
@@ -45,29 +46,15 @@ public class XmlEditor {
 	public XmlEditor() {
 		
 		initialize();
-		for (JButton buttonSelected:object.buttonList) {
-			buttonSelected.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					for (JButton jbutton:object.buttonList) {
-						jbutton.setBackground(Color.white);
-						jbutton.setForeground(Color.black);
-					}
-					buttonSelected.setBackground(Color.BLACK);
-					buttonSelected.setForeground(Color.white);
-				}
-			});
-			
-		}
+		
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		object.buttonList=new ArrayList<>();
+		object.init();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,6 +107,24 @@ public class XmlEditor {
 		object.buttonList.add(compositionLineButton);
 		object.buttonList.add(classButton);
 		object.buttonList.add(useCaseButton);
+		for (JButton buttonSelected:object.buttonList) {
+			buttonSelected.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					for (JButton jbutton:object.buttonList) {
+						jbutton.setBackground(Color.white);
+						jbutton.setForeground(Color.black);
+					}
+					buttonSelected.setBackground(Color.black);
+					buttonSelected.setForeground(Color.white);
+					object.buttonModeSelected=buttonModeEnum.values()[object.buttonList.indexOf(buttonSelected)];
+					System.out.println(object.buttonModeSelected.name());
+				}
+			});
+			
+		}
 	}
 
 }
