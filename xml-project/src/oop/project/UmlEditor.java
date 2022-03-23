@@ -1,11 +1,14 @@
 package oop.project;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import oop.project.SharedObject.buttonModeEnum;
+import oop.project.object.ClassObject;
+import oop.project.object.UseCaseObject;
 
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
@@ -16,9 +19,11 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JLayeredPane;
 
 
-public class XmlEditor {
+public class UmlEditor {
 
 	private JFrame frame;
 
@@ -29,7 +34,7 @@ public class XmlEditor {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					XmlEditor window = new XmlEditor();
+					UmlEditor window = new UmlEditor();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +46,7 @@ public class XmlEditor {
 	/**
 	 * Create the application.
 	 */
-	public XmlEditor() {
+	public UmlEditor() {
 		
 		initialize();
 		
@@ -89,34 +94,48 @@ public class XmlEditor {
 		JMenu editButton = new JMenu("edit");
 		menuBar.add(editButton);
 		
-		JMenuItem groupUngroupButton = new JMenuItem("group/ungroup");
-		editButton.add(groupUngroupButton);
+		JMenuItem groupButton = new JMenuItem("group");
+		editButton.add(groupButton);
+		
+		JCheckBoxMenuItem ungroupButton = new JCheckBoxMenuItem("ungroup");
+		editButton.add(ungroupButton);
 		
 		JMenuItem changeNameButton = new JMenuItem("change name");
 		editButton.add(changeNameButton);
 		
-		SharedObject.buttonList.add(selectButton);
-		SharedObject.buttonList.add(associationLineButton);
-		SharedObject.buttonList.add(generalizationLineButton);
-		SharedObject.buttonList.add(compositionLineButton);
-		SharedObject.buttonList.add(classButton);
-		SharedObject.buttonList.add(useCaseButton);
+		SharedObject.buttomList.add(selectButton);
+		SharedObject.buttomList.add(associationLineButton);
+		SharedObject.buttomList.add(generalizationLineButton);
+		SharedObject.buttomList.add(compositionLineButton);
+		SharedObject.buttomList.add(classButton);
+		SharedObject.buttomList.add(useCaseButton);
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		for (JButton buttonSelected:SharedObject.buttonList) {
+		DrawPanel layeredPane = new DrawPanel();
+		UseCaseObject test=new UseCaseObject(50, 52, 500,300, true, null);
+		System.out.println(test.getSelectedStatic());
+		//test.setBackground(Color.BLACK);
+//		layeredPane.add(test);
+		SharedObject.shapes.add(test);
+		ClassObject test2=new ClassObject(400, 400, 500, 500, true, null);
+		System.out.println(test2.getSelectedStatic());
+		//layeredPane.add(test2);
+		//SharedObject.shapes.add(test2);
+		//test2.setBackground(Color.BLACK);
+		//layeredPane.add(test2);
+		frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
+		for (JButton buttonSelected:SharedObject.buttomList) {
 			buttonSelected.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					for (JButton jbutton:SharedObject.buttonList) {
+					for (JButton jbutton:SharedObject.buttomList) {
 						jbutton.setBackground(Color.white);
 						jbutton.setForeground(Color.black);
 					}
 					buttonSelected.setBackground(Color.black);
 					buttonSelected.setForeground(Color.white);
-					SharedObject.buttonModeSelected=buttonModeEnum.values()[SharedObject.buttonList.indexOf(buttonSelected)];
+					SharedObject.buttonModeSelected=buttonModeEnum.values()[SharedObject.buttomList.indexOf(buttonSelected)];
 					System.out.println(SharedObject.buttonModeSelected.name());
 				}
 			});
