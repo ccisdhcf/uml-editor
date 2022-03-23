@@ -2,7 +2,7 @@ package oop.project;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
-public abstract class object {
+public abstract class SharedObject {
 	static ArrayList<JButton> buttonList;
 	//new mode ->add before null mode
 	static enum buttonModeEnum{

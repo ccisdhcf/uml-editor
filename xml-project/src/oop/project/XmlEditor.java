@@ -5,13 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import oop.project.object.buttonModeEnum;
+import oop.project.SharedObject.buttonModeEnum;
 
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
-import java.awt.Canvas;
 import javax.swing.JButton;
-import javax.swing.Box;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,7 +52,7 @@ public class XmlEditor {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		object.init();
+		SharedObject.init();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,34 +95,34 @@ public class XmlEditor {
 		JMenuItem changeNameButton = new JMenuItem("change name");
 		editButton.add(changeNameButton);
 		
-		object.buttonList.add(selectButton);
-		object.buttonList.add(associationLineButton);
-		object.buttonList.add(generalizationLineButton);
-		object.buttonList.add(compositionLineButton);
-		object.buttonList.add(classButton);
-		object.buttonList.add(useCaseButton);
+		SharedObject.buttonList.add(selectButton);
+		SharedObject.buttonList.add(associationLineButton);
+		SharedObject.buttonList.add(generalizationLineButton);
+		SharedObject.buttonList.add(compositionLineButton);
+		SharedObject.buttonList.add(classButton);
+		SharedObject.buttonList.add(useCaseButton);
 		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		for (JButton buttonSelected:object.buttonList) {
+		for (JButton buttonSelected:SharedObject.buttonList) {
 			buttonSelected.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					for (JButton jbutton:object.buttonList) {
+					for (JButton jbutton:SharedObject.buttonList) {
 						jbutton.setBackground(Color.white);
 						jbutton.setForeground(Color.black);
 					}
 					buttonSelected.setBackground(Color.black);
 					buttonSelected.setForeground(Color.white);
-					object.buttonModeSelected=buttonModeEnum.values()[object.buttonList.indexOf(buttonSelected)];
-					System.out.println(object.buttonModeSelected.name());
+					SharedObject.buttonModeSelected=buttonModeEnum.values()[SharedObject.buttonList.indexOf(buttonSelected)];
+					System.out.println(SharedObject.buttonModeSelected.name());
 				}
 			});
 			
 		}
-		MouseEvent mE = new MouseEvent();
+		
 	}
 
 }

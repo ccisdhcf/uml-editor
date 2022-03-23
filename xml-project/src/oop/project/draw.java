@@ -1,22 +1,13 @@
 package oop.project;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
-import java.text.AttributedCharacterIterator;
-
 import javax.imageio.ImageIO;
 
 
 public class draw {
 	
-	public void drawBaseObject(int x,int y,object.buttonModeEnum mode,Graphics g) {
+	public void drawBaseObject(int x,int y,SharedObject.buttonModeEnum mode,Graphics g) {
 		BufferedImage bi = null ;
 		try {
 			String relativelyPath=System.getProperty("user.dir");
@@ -30,11 +21,11 @@ public class draw {
 		}
 		
 		System.out.println("draw");
-		if (mode.equals(object.buttonModeEnum.useCaseMode)) {
+		if (mode.equals(SharedObject.buttonModeEnum.useCaseMode)) {
 			
 			g.drawImage(bi, 10, 10, null);
 		}
-		else if (mode.equals(object.buttonModeEnum.classMode)) {
+		else if (mode.equals(SharedObject.buttonModeEnum.classMode)) {
 			g.drawImage(bi, x, y, null);
 		}
 	}
