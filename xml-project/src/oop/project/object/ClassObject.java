@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Iterator;
 
-public class ClassObject extends ObjectBase {
+
+public class ClassObject extends ObjectBase  {
 
 	/**
 	 * 
@@ -22,7 +23,13 @@ public class ClassObject extends ObjectBase {
 	public void paintObject(Graphics g) {
 		g.setColor(Color.black);
 		for (int t = 0; t < paintSlice; t++) {
-			g.drawRect(getPosX(), getPosY() + ((t * getObjectHeight()) / paintSlice), getObjectWidth(), getObjectHeight() / paintSlice);
+			g.drawRect(getPosX(), getPosY() + ((t * getObjectHeight()) / paintSlice), getObjectWidth(),
+					getObjectHeight() / paintSlice);
 		}
+	}
+
+	@Override
+	public void paintName(Graphics g) {
+		g.drawString(getName(), getPosX() + getObjectWidth() / 6, getPosY() + getObjectHeight() / 5);
 	}
 }

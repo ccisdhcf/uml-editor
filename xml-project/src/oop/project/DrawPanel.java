@@ -6,14 +6,18 @@ import java.awt.Graphics;
 import javax.swing.JLayeredPane;
 
 import oop.project.object.ObjectBase;
+import oop.project.object.line.LineBase;
 
 @SuppressWarnings("serial")
 public class DrawPanel extends JLayeredPane {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (ObjectBase a:SharedObject.shapes) {
-			a.printComponent(g);
+		for (ObjectBase shape:SharedObject.shapes) {
+			shape.printComponent(g);
+		}
+		for (LineBase line:SharedObject.lines) {
+			line.printComponent(g);
 		}
 //		g.drawLine(100, 100, 1500, 1000);	
 //		g.setColor(Color.black);
@@ -24,6 +28,11 @@ public class DrawPanel extends JLayeredPane {
 //		
 //		g.drawOval(100, 100, 500, 500);
 	}
-//	@Override
-//	public void drawComponent 
+//	public void addObject(ObjectBase _add) {
+//		SharedObject.shapes.add(_add);
+//	}
+//	public void addLine (LineBase _add) {
+//		SharedObject.lines.add(_add);
+//	}
+
 }

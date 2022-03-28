@@ -24,8 +24,13 @@ public class UseCaseObject extends ObjectBase {
 	public void paintObject(Graphics g) {
 		g.setColor(Color.black);
 		g.drawOval(getPosX(), getPosY(), getObjectWidth(), getObjectHeight());
-		//System.out.println(getPosX()+" "+getPosY()+" "+ getObjectWidth()+" "+getObjectHeight());
-		
-		
+		// System.out.println(getPosX()+" "+getPosY()+" "+ getObjectWidth()+"
+		// "+getObjectHeight());
+
+	}
+
+	@Override
+	public void paintName(Graphics g) {
+		g.drawString(getName(), getPosX() + getObjectWidth() / 8, getPosY() + getObjectHeight() / 2);
 	}
 }
