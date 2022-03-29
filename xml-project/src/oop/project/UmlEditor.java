@@ -144,6 +144,7 @@ public class UmlEditor {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					SharedObject.resetSelected();
 					// TODO Auto-generated method stub
 					for (JButton jbutton : SharedObject.buttomList) {
 						jbutton.setBackground(Color.lightGray);

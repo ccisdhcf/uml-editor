@@ -2,9 +2,12 @@ package oop.project.object;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.Iterator;
 import java.util.UUID;
 
 import javax.swing.JComponent;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.eclipse.jface.viewers.ColorCellEditor;
 
@@ -15,7 +18,7 @@ public abstract class ObjectBase extends JComponent {
 	private static final long serialVersionUID = -7051581027378411528L;
 
 	public enum port {
-		up, down, left, right,nullMode
+		up, down, left, right, nullMode
 	};
 
 	private int positionX;
@@ -38,8 +41,8 @@ public abstract class ObjectBase extends JComponent {
 		height = 0;
 		selected = false;
 		name = null;
-		uuid=setUUID();
-		
+		uuid = setUUID();
+
 	}
 
 	public ObjectBase(int _positionX, int _positionY, int _width, int _height, boolean _selected, String _name) {
@@ -49,7 +52,7 @@ public abstract class ObjectBase extends JComponent {
 		height = _height;
 		selected = _selected;
 		name = _name;
-		uuid=setUUID();
+		uuid = setUUID();
 	}
 
 	public void setPosition(int x, int y) {
@@ -64,13 +67,14 @@ public abstract class ObjectBase extends JComponent {
 	public void setSelected(boolean b) {
 		selected = b;
 	}
-    private String setUUID() {
-    	return UUID.randomUUID().toString().replaceAll("-", "");
-    }    
+
+	private String setUUID() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
 	public String getUUID() {
 		return uuid;
 	}
-	 
 
 	public String getName() {
 		return name;
@@ -94,6 +98,17 @@ public abstract class ObjectBase extends JComponent {
 
 	public int getObjectHeight() {
 		return height;
+	}
+
+	public boolean inArea(Point src, Point des) {
+		Point minPoint = new Point(src.x < des.x ? src.x : des.x, src.y < des.y ? src.y : des.y);
+		Point maxPoint = new Point(src.x > des.x ? src.x : des.x, src.y > des.y ? src.y : des.y);
+		if (minPoint.x < positionX && minPoint.y < positionY && maxPoint.x > (positionX + width)
+				&& maxPoint.y > (positionY + height)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean checkBorder(int x, int y) {
@@ -121,38 +136,40 @@ public abstract class ObjectBase extends JComponent {
 			}
 		}
 	}
+
 	public int getPortPosX(port p) {
 		switch (p) {
 		case up: {
-			return positionX+width/2;
+			return positionX + width / 2;
 		}
 		case down: {
-			return positionX+width/2;
+			return positionX + width / 2;
 		}
 		case left: {
 			return positionX;
 		}
 		case right: {
-			return positionX+width;
+			return positionX + width;
 		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + p);
 		}
-		
+
 	}
+
 	public int getPortPosY(port p) {
 		switch (p) {
 		case up: {
 			return positionY;
 		}
 		case down: {
-			return positionY+height;
+			return positionY + height;
 		}
 		case left: {
-			return positionY+height/2;
+			return positionY + height / 2;
 		}
 		case right: {
-			return positionY+height/2;
+			return positionY + height / 2;
 		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + p);
