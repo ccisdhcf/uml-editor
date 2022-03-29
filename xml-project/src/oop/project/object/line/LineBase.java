@@ -59,7 +59,7 @@ public abstract class LineBase extends JComponent {
 		type = _type;
 		selected = _selected;
 	}
-	private void getPos(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
+	public void getPos(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
 		for (ObjectBase ob:SharedObject.shapes) {
 			if (ob.getUUID().equals(_srcUUID)) {
 				srcPositionX=ob.getPortPosX(_srcPort);
@@ -108,7 +108,18 @@ public abstract class LineBase extends JComponent {
 	public int getDesPosY() {
 		return desPositionY;
 	}
-
+	public String getSrcUUID() {
+		return srcUUID;
+	}
+	public String getDesUUID() {
+		return desUUID;
+	}
+	public ObjectBase.port getSrcPort() {
+		return srcPort;
+	}
+	public ObjectBase.port getDesPort() {
+		return desPort;
+	}
 	public SharedObject.buttonModeEnum getType() {
 		return type;
 	}

@@ -11,8 +11,8 @@ public class CompositionLine extends LineBase{
 	 * 
 	 */
 	private static final long serialVersionUID = -3612946413810587827L;
-	private static final int arrowLen=15;
-	private static final int arrowDegree=35;
+	private static final int arrowLen=10;
+	private static final int arrowDegree=20;
 	public CompositionLine() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -28,20 +28,19 @@ public class CompositionLine extends LineBase{
 	@Override
 	public void printObject(Graphics g) {
 		// TODO Auto-generated method stub
-		double tan=(getSrcPosY()-getDesPosY())/(getSrcPosX()-getDesPosX());
-		double arctan=Math.atan(tan);
-		// System.out.println(tan+" "+arctan);
-		int arrowX=(int) (arrowLen*Math.sin(arctan+Math.toRadians(arrowDegree)));
-		int arrowY=(int) (arrowLen*Math.cos(arctan+Math.toRadians(arrowDegree)));
-		int arrowX2=(int) (arrowLen*Math.sin(arctan-Math.toRadians(arrowDegree)));
-		int arrowY2=(int) (arrowLen*Math.cos(arctan-Math.toRadians(arrowDegree)));
-		g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2));
-		g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX, getDesPosY()-arrowY);
-		g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
-		
-		g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX, getDesPosY()-arrowY);
-		g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
-		//g.drawLine(getDesPosX()-arrowX, getDesPosY()-arrowY,  getDesPosX()-arrowX2, getDesPosY()-arrowY2);
+	    double tan=(double)(getSrcPosY()-getDesPosY())/(getSrcPosX()-getDesPosX());
+	    double arctan=Math.atan(tan);
+	    // System.out.println(tan+" "+arctan);
+	    int arrowX=(int) (arrowLen*Math.cos(arctan+Math.toRadians(arrowDegree)));
+	    int arrowY=(int) (arrowLen*Math.sin(arctan+Math.toRadians(arrowDegree)));
+	    int arrowX2=(int) (arrowLen*Math.cos(arctan-Math.toRadians(arrowDegree)));
+	    int arrowY2=(int) (arrowLen*Math.sin(arctan-Math.toRadians(arrowDegree)));
+	    g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2));
+	    g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX, getDesPosY()-arrowY);
+	    g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
+	    
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX, getDesPosY()-arrowY);
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
 		
 	}
 

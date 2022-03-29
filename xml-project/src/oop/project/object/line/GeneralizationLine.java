@@ -29,21 +29,20 @@ public class GeneralizationLine extends LineBase{
 	@Override
 	public void printObject(Graphics g) {
 		// TODO Auto-generated method stub
-		double tan=(getSrcPosY()-getDesPosY())/(getSrcPosX()-getDesPosX());
-		double arctan=Math.atan(tan);
-		// System.out.println(tan+" "+arctan);
-		int arrowX=(int) (arrowLen*Math.sin(arctan+Math.toRadians(arrowDegree)));
-		int arrowY=(int) (arrowLen*Math.cos(arctan+Math.toRadians(arrowDegree)));
-		int arrowX2=(int) (arrowLen*Math.sin(arctan-Math.toRadians(arrowDegree)));
-		int arrowY2=(int) (arrowLen*Math.cos(arctan-Math.toRadians(arrowDegree)));
-		g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()-(arrowX+arrowX2)/2, getDesPosY()-(arrowY+arrowY2)/2);
-	
-		
-		g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX, getDesPosY()-arrowY);
-		
-		g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
-		g.drawLine(getDesPosX()-arrowX, getDesPosY()-arrowY,  getDesPosX()-arrowX2, getDesPosY()-arrowY2);
-		
+		double tan=(double)(getSrcPosY()-getDesPosY())/(getSrcPosX()-getDesPosX());
+	    double arctan=Math.atan(tan);
+	    // System.out.println(tan+" "+arctan);
+	    int arrowX=(int) (arrowLen*Math.cos(arctan+Math.toRadians(arrowDegree)));
+	    int arrowY=(int) (arrowLen*Math.sin(arctan+Math.toRadians(arrowDegree)));
+	    int arrowX2=(int) (arrowLen*Math.cos(arctan-Math.toRadians(arrowDegree)));
+	    int arrowY2=(int) (arrowLen*Math.sin(arctan-Math.toRadians(arrowDegree)));
+	    g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()-(arrowX+arrowX2)/2, getDesPosY()-(arrowY+arrowY2)/2);
+	  
+	    
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX, getDesPosY()-arrowY);
+	    
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
+	    g.drawLine(getDesPosX()-arrowX, getDesPosY()-arrowY,  getDesPosX()-arrowX2, getDesPosY()-arrowY2);		
 
 		
 	}

@@ -1,6 +1,9 @@
 package oop.project;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -8,9 +11,9 @@ import oop.project.object.ObjectBase;
 import oop.project.object.line.LineBase;
 
 public class SharedObject {
-	public static ArrayList<JButton> buttomList;
-	public static ArrayList<ObjectBase> shapes;
-	public static ArrayList<LineBase> lines;
+	public static ArrayList<JButton> buttomList=new ArrayList<>();
+	public static ArrayList<ObjectBase> shapes=new ArrayList<>();
+	public static ArrayList<LineBase> lines=new ArrayList<>();
 
 	// new mode ->add before null mode
 	public enum buttonModeEnum {
@@ -19,13 +22,13 @@ public class SharedObject {
 
 	static JPanel frameJPanel;
 	static DrawPanel drawPanel;
-	public static buttonModeEnum buttonModeSelected;
+	public static buttonModeEnum buttonMode;
 
 	static public void init() {
-		buttomList = new ArrayList<>();
-		shapes = new ArrayList<>();
-		lines = new ArrayList<>();
-		buttonModeSelected = buttonModeEnum.nullMode;
+//		buttomList = new ArrayList<>();
+//		shapes = new ArrayList<>();
+//		lines = new ArrayList<>();
+		buttonMode = buttonModeEnum.nullMode;
 
 	}
 
@@ -39,11 +42,17 @@ public class SharedObject {
 
 	static public void setDrawPanel(DrawPanel _dp) {
 		drawPanel = _dp;
-	
+
 	}
 
 	static public void setFrameJPanel(JPanel _frame) {
 		frameJPanel = _frame;
+	}
+
+	static public void resetSelected() {
+		for (ObjectBase shape : shapes) {
+			shape.setSelected(false);
+		}
 	}
 
 }

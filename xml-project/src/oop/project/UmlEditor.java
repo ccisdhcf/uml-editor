@@ -15,6 +15,7 @@ import oop.project.object.line.CompositionLine;
 import oop.project.object.line.GeneralizationLine;
 import oop.project.object.listener.LineListener;
 import oop.project.object.listener.ObjectListener;
+import oop.project.object.listener.SelectListener;
 
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
@@ -90,7 +91,7 @@ public class UmlEditor {
 		ButtonBase classButton = new ButtonBase("class", SharedObject.buttonModeEnum.classMode);
 		panel.add(classButton);
 		
-		ButtonBase useCaseButton = new ButtonBase("use class", SharedObject.buttonModeEnum.useCaseMode);
+		ButtonBase useCaseButton = new ButtonBase("use case", SharedObject.buttonModeEnum.useCaseMode);
 		panel.add(useCaseButton);
 		
 
@@ -150,16 +151,21 @@ public class UmlEditor {
 					}
 					buttonSelected.setBackground(Color.black);
 					buttonSelected.setForeground(Color.white);
-					SharedObject.buttonModeSelected = buttonModeEnum.values()[SharedObject.buttomList
+					SharedObject.buttonMode = buttonModeEnum.values()[SharedObject.buttomList
 							.indexOf(buttonSelected)];
 					// debug
-					System.out.println(SharedObject.buttonModeSelected.name());
+					System.out.println(SharedObject.buttonMode.name());
 				}
 			});
 
 		}
 		layeredPane.addMouseListener(new ObjectListener());
 		layeredPane.addMouseListener(new LineListener());
+		SelectListener SL=new SelectListener();
+		layeredPane.addMouseListener( SL);
+		layeredPane.addMouseMotionListener(SL);
+		
+		
 		
 		SharedObject.setFrameJPanel(panel);
 		SharedObject.setDrawPanel(layeredPane);
