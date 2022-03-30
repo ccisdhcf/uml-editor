@@ -31,16 +31,17 @@ public class CompositionLine extends LineBase{
 	    double tan=(double)(getSrcPosY()-getDesPosY())/(getSrcPosX()-getDesPosX());
 	    double arctan=Math.atan(tan);
 	    // System.out.println(tan+" "+arctan);
+	    int sign = getDesPosX() > getSrcPosX() ? -1 : 1;
 	    int arrowX=(int) (arrowLen*Math.cos(arctan+Math.toRadians(arrowDegree)));
 	    int arrowY=(int) (arrowLen*Math.sin(arctan+Math.toRadians(arrowDegree)));
 	    int arrowX2=(int) (arrowLen*Math.cos(arctan-Math.toRadians(arrowDegree)));
 	    int arrowY2=(int) (arrowLen*Math.sin(arctan-Math.toRadians(arrowDegree)));
-	    g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2));
-	    g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX, getDesPosY()-arrowY);
-	    g.drawLine(getDesPosX()-(arrowX+arrowX2), getDesPosY()-(arrowY+arrowY2), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
+	    g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX()+sign*(arrowX+arrowX2), getDesPosY()+sign*(arrowY+arrowY2));
+	    g.drawLine(getDesPosX()+sign*(arrowX+arrowX2), getDesPosY()+sign*(arrowY+arrowY2), getDesPosX()+sign*arrowX, getDesPosY()+sign*arrowY);
+	    g.drawLine(getDesPosX()+sign*(arrowX+arrowX2), getDesPosY()+sign*(arrowY+arrowY2), getDesPosX()+sign*arrowX2, getDesPosY()+sign*arrowY2);
 	    
-	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX, getDesPosY()-arrowY);
-	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()-arrowX2, getDesPosY()-arrowY2);
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()+sign*arrowX, getDesPosY()+sign*arrowY);
+	    g.drawLine(getDesPosX(),getDesPosY(), getDesPosX()+sign*arrowX2, getDesPosY()+sign*arrowY2);
 		
 	}
 

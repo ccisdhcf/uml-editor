@@ -37,4 +37,10 @@ public class UseCaseObject extends ObjectBase {
 		g.setColor(Color.black);
 		g.drawString(getName(), getPosX() + getObjectWidth() / 8, getPosY() + getObjectHeight() / 2);
 	}
+
+	@Override
+	public void ungroup() {
+		// TODO Auto-generated method stub
+		
+	}
 }

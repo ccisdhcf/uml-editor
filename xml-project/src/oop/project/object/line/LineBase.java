@@ -2,10 +2,10 @@ package oop.project.object.line;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Iterator;
+import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
-
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 import oop.project.object.ObjectBase.port;
@@ -55,12 +55,24 @@ public abstract class LineBase extends JComponent {
 		desUUID=_desUUID;
 		srcPort=_srcPort;
 		desPort=_desPort;
-		getPos(srcUUID, desUUID, srcPort, desPort);
+		getPosFromUUID(srcUUID, desUUID, srcPort, desPort);
 		type = _type;
 		selected = _selected;
 	}
-	public void getPos(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
+	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
 		for (ObjectBase ob:SharedObject.shapes) {
+			if (ob.getUUID().equals(_srcUUID)) {
+				srcPositionX=ob.getPortPosX(_srcPort);
+				srcPositionY=ob.getPortPosY(_srcPort);
+			}
+			else if (ob.getUUID().equals(_desUUID)) {
+				desPositionX=ob.getPortPosX(_desPort);
+				desPositionY=ob.getPortPosY(_desPort);
+			}
+		}
+	}
+	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,ArrayList<ObjectBase> _obList) {
+		for (ObjectBase ob:_obList) {
 			if (ob.getUUID().equals(_srcUUID)) {
 				srcPositionX=ob.getPortPosX(_srcPort);
 				srcPositionY=ob.getPortPosY(_srcPort);
@@ -124,6 +136,16 @@ public abstract class LineBase extends JComponent {
 		return type;
 	}
 
+	public boolean inArea(Point src, Point des) {
+		Point minPoint = new Point(src.x < des.x ? src.x : des.x, src.y < des.y ? src.y : des.y);
+		Point maxPoint = new Point(src.x > des.x ? src.x : des.x, src.y > des.y ? src.y : des.y);
+		if (minPoint.x < srcPositionX && minPoint.y < srcPositionY && maxPoint.x > desPositionX
+				&& maxPoint.y > desPositionY) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public abstract void printObject(Graphics g);
 	public void paintBorder(Graphics g) {
 		g.setColor(Color.BLUE);
@@ -134,8 +156,8 @@ public abstract class LineBase extends JComponent {
 	public void printComponent(Graphics g) {
 		super.printComponent(g);
 		printObject(g);
-		if (selected) {
-			paintBorder(g);
-		}
+//		if (selected) {
+//			paintBorder(g);
+//		}
 	}
 }

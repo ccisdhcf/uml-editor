@@ -2,16 +2,8 @@ package oop.project.object.listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Iterator;
-
-import javax.swing.JOptionPane;
-
-import org.eclipse.swt.events.MouseAdapter;
-
 import oop.project.SharedObject;
-import oop.project.object.ClassObject;
 import oop.project.object.ObjectBase;
-import oop.project.object.UseCaseObject;
 import oop.project.object.line.AssociationLine;
 import oop.project.object.line.CompositionLine;
 import oop.project.object.line.GeneralizationLine;
@@ -49,7 +41,7 @@ public class LineListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		System.out.println("mousePressed " + e.getX() + " " + e.getY());
 		// TODO Auto-generated method stub
 		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.associationLineMode
 				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.compositionLineMode
@@ -68,6 +60,7 @@ public class LineListener implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		System.out.println("mouseReleased " + e.getX() + " " + e.getY());
 		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.associationLineMode
 				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.compositionLineMode
 				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.generalizationLineMode) {
@@ -80,28 +73,31 @@ public class LineListener implements MouseListener {
 				}
 			}
 			LineBase newLine;
-			switch (SharedObject.buttonMode) {
-			case associationLineMode: {
-				newLine = new AssociationLine(srcUUID, desUUID, srcPort, desPort, false,
-						SharedObject.buttonMode);
-				break;
-			}
-			case generalizationLineMode: {
-				newLine = new GeneralizationLine(srcUUID, desUUID, srcPort, desPort, false,
-						SharedObject.buttonMode);
-				break;
-			}
-			case compositionLineMode: {
-				newLine = new CompositionLine(srcUUID, desUUID, srcPort, desPort, false,
-						SharedObject.buttonMode);
-				break;
-			}
+			if (srcUUID!=desUUID) {
+				switch (SharedObject.buttonMode) {
+				case associationLineMode: {
+					newLine = new AssociationLine(srcUUID, desUUID, srcPort, desPort, false,
+							SharedObject.buttonMode);
+					break;
+				}
+				case generalizationLineMode: {
+					newLine = new GeneralizationLine(srcUUID, desUUID, srcPort, desPort, false,
+							SharedObject.buttonMode);
+					break;
+				}
+				case compositionLineMode: {
+					newLine = new CompositionLine(srcUUID, desUUID, srcPort, desPort, false,
+							SharedObject.buttonMode);
+					break;
+				}
 
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + SharedObject.buttonMode);
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + SharedObject.buttonMode);
+				}
+				SharedObject.lines.add(newLine);
+				SharedObject.getDrawPanel().repaint();
 			}
-			SharedObject.lines.add(newLine);
-			SharedObject.getDrawPanel().repaint();
+		
 		}
 		// TODO Auto-generated method stub
 

@@ -33,14 +33,16 @@ public class AssociationLine extends LineBase {
 	public void printObject(Graphics g) {
 		// TODO Auto-generated method stub
 		g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX(), getDesPosY());
-	    double tan = (double) (getSrcPosY()-getDesPosY() ) / (getSrcPosX()-getDesPosX());
-	    double arctan = Math.toDegrees(Math.atan(tan));
-	    int arrowX = (int) (arrowLen * Math.cos(Math.toRadians(arctan + arrowDegree)));
-	    int arrowY = (int) (arrowLen * Math.sin(Math.toRadians(arctan + arrowDegree)));
-	    g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() - arrowX, getDesPosY() - arrowY);
-	    arrowX = (int) (arrowLen * Math.cos(Math.toRadians(arctan - arrowDegree)));
-	    arrowY = (int) (arrowLen * Math.sin(Math.toRadians(arctan - arrowDegree)));
-	    g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() - arrowX, getDesPosY() - arrowY);
+		double tan = (double) (getSrcPosY() - getDesPosY()) / (getSrcPosX() - getDesPosX());
+		double arctan = Math.toDegrees(Math.atan(tan));
+		//System.out.println("line: " + arctan + " " + tan);
+		int sign = getDesPosX() > getSrcPosX() ? -1 : 1;
+		int arrowX = (int) (arrowLen * Math.cos(Math.toRadians(arctan + arrowDegree)));
+		int arrowY = (int) (arrowLen * Math.sin(Math.toRadians(arctan + arrowDegree)));
+		g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() + sign * arrowX, getDesPosY() + sign * arrowY);
+		arrowX = (int) (arrowLen * Math.cos(Math.toRadians(arctan - arrowDegree)));
+		arrowY = (int) (arrowLen * Math.sin(Math.toRadians(arctan - arrowDegree)));
+		g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() + sign * arrowX, getDesPosY() + sign * arrowY);
 	}
 
 }

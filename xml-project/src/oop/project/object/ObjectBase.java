@@ -3,13 +3,8 @@ package oop.project.object;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Iterator;
 import java.util.UUID;
-
 import javax.swing.JComponent;
-import javax.swing.text.StyledEditorKit.BoldAction;
-
-import org.eclipse.jface.viewers.ColorCellEditor;
 
 public abstract class ObjectBase extends JComponent {
 	/**
@@ -68,6 +63,14 @@ public abstract class ObjectBase extends JComponent {
 		selected = b;
 	}
 
+	public void setWidth(int _width) {
+		width = _width;
+	}
+
+	public void setHeight(int _height) {
+		height = _height;
+	}
+
 	private String setUUID() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
@@ -109,6 +112,10 @@ public abstract class ObjectBase extends JComponent {
 		} else {
 			return false;
 		}
+	}
+	public void shiftObject(int x,int y) {
+		positionX=positionX+x;
+		positionY=positionY+y;
 	}
 
 	public boolean checkBorder(int x, int y) {
@@ -225,4 +232,6 @@ public abstract class ObjectBase extends JComponent {
 		}
 
 	}
+
+	public abstract void ungroup();
 }

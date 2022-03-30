@@ -2,7 +2,7 @@ package oop.project.object;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Iterator;
+
 
 
 public class ClassObject extends ObjectBase  {
@@ -31,5 +31,11 @@ public class ClassObject extends ObjectBase  {
 	@Override
 	public void paintName(Graphics g) {
 		g.drawString(getName(), getPosX() + getObjectWidth() / 6, getPosY() + getObjectHeight() / 5);
+	}
+
+	@Override
+	public void ungroup() {
+		// TODO Auto-generated method stub
+		
 	}
 }

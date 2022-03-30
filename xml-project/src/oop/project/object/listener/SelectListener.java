@@ -3,12 +3,8 @@ package oop.project.object.listener;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.security.spec.RSAOtherPrimeInfo;
-import java.awt.Graphics;
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
-import oop.project.object.ObjectBase.port;
-import oop.project.object.SelectAreaObject;
 import oop.project.object.line.LineBase;
 
 public class SelectListener extends MouseAdapter {
@@ -38,13 +34,15 @@ public class SelectListener extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("select Press " + e.getX() + " " + e.getY());
+		
 		IsPressPointAObj = false;
 		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.selectMode) {
 			SharedObject.resetSelected();
 
 			for (ObjectBase ob : SharedObject.shapes) {
 				if (ob.checkBorder(e.getX(), e.getY())) {
+					SharedObject.sao.setSrc(new Point(0, 0));
+					SharedObject.sao.setDes(new Point(0, 0));
 					ob.setSelected(true);
 					objectBase = ob;
 					shapeShift = e.getPoint();
@@ -58,7 +56,7 @@ public class SelectListener extends MouseAdapter {
 			}
 			if (!IsPressPointAObj) {
 				selectAreaSrc = new Point(e.getPoint());
-				
+
 				SharedObject.sao.setSrc(e.getPoint());
 				SharedObject.sao.setDes(e.getPoint());
 				System.out.println(
@@ -77,6 +75,11 @@ public class SelectListener extends MouseAdapter {
 			for (ObjectBase ob : SharedObject.shapes) {
 				if (ob.inArea(selectAreaSrc, selectAreaDes)) {
 					ob.setSelected(true);
+				}
+			}
+			for (LineBase lb : SharedObject.lines) {
+				if (lb.inArea(selectAreaSrc, selectAreaDes)) {
+					lb.setSelected(true);
 				}
 			}
 			SharedObject.getDrawPanel().repaint();
@@ -101,7 +104,7 @@ public class SelectListener extends MouseAdapter {
 		// TODO Auto-generated method stub
 
 		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.selectMode) {
-			if (shapeShift != null) {
+			if (shapeShift != null && objectBase != null) {
 //				for (ObjectBase ob : SharedObject.shapes) {
 //				if (ob.checkBorder(e.getX(), e.getY())) {
 //					ob.setPosition(e.getX(), e.getY());
@@ -114,11 +117,12 @@ public class SelectListener extends MouseAdapter {
 				int _y = e.getPoint().y - shapeShift.y;
 				// BeforeDragPoint=new Point(objectBase.getPosX(),objectBase.getPosY());
 				objectBase.setPosition(objBeforeDragPoint.x + _x, objBeforeDragPoint.y + _y);
+				//objectBase.shiftObject(_x, _y);
 
 //			System.out.println("select drag " + e.getPoint().x + " " + e.getPoint().y + " " + shapeShift.x + " "
 //					+ shapeShift.y + " " + objectBase.getPosX() + " " + objectBase.getPosY() + " ");
 				for (LineBase lb : SharedObject.lines) {
-					lb.getPos(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort());
+					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort());
 				}
 				SharedObject.getDrawPanel().repaint();
 			} else if (!IsPressPointAObj) {

@@ -1,8 +1,8 @@
 package oop.project;
 
-import java.awt.Color;
+
 import java.awt.Graphics;
-import java.security.spec.RSAOtherPrimeInfo;
+
 
 import javax.swing.JLayeredPane;
 
@@ -11,6 +11,10 @@ import oop.project.object.line.LineBase;
 
 @SuppressWarnings("serial")
 public class DrawPanel extends JLayeredPane {
+	public DrawPanel() {
+		super();
+		this.setLayout(null);;
+	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

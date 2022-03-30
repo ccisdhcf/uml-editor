@@ -2,14 +2,7 @@ package oop.project.object.listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-
-import org.eclipse.swt.events.MouseAdapter;
-
 import oop.project.SharedObject;
 import oop.project.object.ClassObject;
 import oop.project.object.ObjectBase;

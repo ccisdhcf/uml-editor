@@ -7,6 +7,10 @@ import java.awt.Point;
 import javax.swing.JComponent;
 
 public class SelectAreaObject extends JComponent{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4632407142518378491L;
 	private Point src;
 	private Point des;
 	public SelectAreaObject() {

@@ -8,8 +8,11 @@ import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 
 public class ObjectSelectListener extends MouseAdapter {
+	@SuppressWarnings("unused")
 	private Point shapeShift;
+	@SuppressWarnings("unused")
 	private Point dragPoint;
+	@SuppressWarnings("unused")
 	private ObjectBase objectBase;
 
 	public ObjectSelectListener() {

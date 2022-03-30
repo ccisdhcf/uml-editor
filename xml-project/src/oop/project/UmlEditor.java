@@ -1,26 +1,16 @@
 package oop.project;
 
 import java.awt.EventQueue;
-import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import layout.ButtonBase;
 import oop.project.SharedObject.buttonModeEnum;
-import oop.project.object.ClassObject;
-import oop.project.object.UseCaseObject;
-import oop.project.object.line.AssociationLine;
-import oop.project.object.line.CompositionLine;
-import oop.project.object.line.GeneralizationLine;
 import oop.project.object.listener.LineListener;
+import oop.project.object.listener.ManuBarListener;
 import oop.project.object.listener.ObjectListener;
 import oop.project.object.listener.SelectListener;
-
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -28,9 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JLayeredPane;
 
 public class UmlEditor {
 
@@ -74,26 +61,26 @@ public class UmlEditor {
 		frame.getContentPane().add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(6, 0, 0, 0));
 
-
 		ButtonBase selectButton = new ButtonBase("select", SharedObject.buttonModeEnum.selectMode);
 		panel.add(selectButton);
 
-		
-		ButtonBase associationLineButton = new ButtonBase("association line", SharedObject.buttonModeEnum.associationLineMode);
+		ButtonBase associationLineButton = new ButtonBase("association line",
+				SharedObject.buttonModeEnum.associationLineMode);
 		panel.add(associationLineButton);
-		
-		ButtonBase generalizationLineButton = new ButtonBase("generalization line", SharedObject.buttonModeEnum.generalizationLineMode);
+
+		ButtonBase generalizationLineButton = new ButtonBase("generalization line",
+				SharedObject.buttonModeEnum.generalizationLineMode);
 		panel.add(generalizationLineButton);
-		
-		ButtonBase compositionLineButton = new ButtonBase("composition line", SharedObject.buttonModeEnum.compositionLineMode);
+
+		ButtonBase compositionLineButton = new ButtonBase("composition line",
+				SharedObject.buttonModeEnum.compositionLineMode);
 		panel.add(compositionLineButton);
-		
+
 		ButtonBase classButton = new ButtonBase("class", SharedObject.buttonModeEnum.classMode);
 		panel.add(classButton);
-		
+
 		ButtonBase useCaseButton = new ButtonBase("use case", SharedObject.buttonModeEnum.useCaseMode);
 		panel.add(useCaseButton);
-		
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -104,20 +91,22 @@ public class UmlEditor {
 		JMenu editButton = new JMenu("edit");
 		menuBar.add(editButton);
 
+		ManuBarListener mbl = new ManuBarListener();
+		
 		JMenuItem groupButton = new JMenuItem("group");
+		groupButton.addActionListener(mbl);
 		editButton.add(groupButton);
 
 		JMenuItem ungroupButton = new JMenuItem("ungroup");
+		ungroupButton.addActionListener(mbl);
 		editButton.add(ungroupButton);
 
 		JMenuItem changeNameButton = new JMenuItem("change name");
+		changeNameButton.addActionListener(mbl);
 		editButton.add(changeNameButton);
 
-	
-
 		DrawPanel layeredPane = new DrawPanel();
-		
-		
+
 //		UseCaseObject test=new UseCaseObject(50, 52, 70,50, true, "sadawd");
 //		SharedObject.shapes.add(test);
 //		ClassObject test2=new ClassObject(400, 400, 70, 70, false, "asdasdac");
@@ -145,15 +134,13 @@ public class UmlEditor {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					SharedObject.resetSelected();
-					// TODO Auto-generated method stub
 					for (JButton jbutton : SharedObject.buttomList) {
 						jbutton.setBackground(Color.lightGray);
 						jbutton.setForeground(Color.black);
 					}
 					buttonSelected.setBackground(Color.black);
 					buttonSelected.setForeground(Color.white);
-					SharedObject.buttonMode = buttonModeEnum.values()[SharedObject.buttomList
-							.indexOf(buttonSelected)];
+					SharedObject.buttonMode = buttonModeEnum.values()[SharedObject.buttomList.indexOf(buttonSelected)];
 					// debug
 					System.out.println(SharedObject.buttonMode.name());
 				}
@@ -162,12 +149,10 @@ public class UmlEditor {
 		}
 		layeredPane.addMouseListener(new ObjectListener());
 		layeredPane.addMouseListener(new LineListener());
-		SelectListener SL=new SelectListener();
-		layeredPane.addMouseListener( SL);
+		SelectListener SL = new SelectListener();
+		layeredPane.addMouseListener(SL);
 		layeredPane.addMouseMotionListener(SL);
-		
-		
-		
+
 		SharedObject.setFrameJPanel(panel);
 		SharedObject.setDrawPanel(layeredPane);
 

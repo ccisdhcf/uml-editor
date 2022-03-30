@@ -9,6 +9,12 @@ import javax.swing.JButton;
 import oop.project.SharedObject;
 
 public class ButtonBase extends JButton {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5685964380797188013L;
+	
+	@SuppressWarnings("unused")
 	private SharedObject.buttonModeEnum buttonMode;
 
 	public ButtonBase() {
