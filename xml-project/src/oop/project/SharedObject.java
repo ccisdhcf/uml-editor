@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import oop.project.object.ObjectBase;
+import oop.project.object.SelectAreaObject;
 import oop.project.object.line.LineBase;
 
 public class SharedObject {
@@ -31,7 +32,7 @@ public class SharedObject {
 		buttonMode = buttonModeEnum.nullMode;
 
 	}
-
+	static public SelectAreaObject sao=new SelectAreaObject();
 	static public DrawPanel getDrawPanel() {
 		return drawPanel;
 	}

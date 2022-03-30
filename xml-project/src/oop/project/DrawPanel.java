@@ -2,6 +2,7 @@ package oop.project;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.security.spec.RSAOtherPrimeInfo;
 
 import javax.swing.JLayeredPane;
 
@@ -19,6 +20,7 @@ public class DrawPanel extends JLayeredPane {
 		for (LineBase line:SharedObject.lines) {
 			line.printComponent(g);
 		}
+		SharedObject.sao.printComponent(g);
 //		g.drawLine(100, 100, 1500, 1000);	
 //		g.setColor(Color.black);
 //		int paintSlice=3;
