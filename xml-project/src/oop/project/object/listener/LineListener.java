@@ -18,6 +18,8 @@ public class LineListener implements MouseListener {
 	private String desUUID;
 	private ObjectBase.port srcPort;
 	private ObjectBase.port desPort;
+	private boolean isSrcGroup;
+	private boolean isDesGroup;
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -52,6 +54,7 @@ public class LineListener implements MouseListener {
 				if (ob.checkBorder(srcX, srcY)) {
 					srcUUID = ob.getUUID();
 					srcPort = ob.getNearestPort(srcX, srcY);
+					isSrcGroup=ob.getIsGroup();
 				}
 			}
 		}
@@ -70,10 +73,11 @@ public class LineListener implements MouseListener {
 				if (ob.checkBorder(desX, desY)) {
 					desUUID = ob.getUUID();
 					desPort = ob.getNearestPort(desX, desY);
+					isDesGroup=ob.getIsGroup();
 				}
 			}
 			LineBase newLine;
-			if (srcUUID!=desUUID) {
+			if (srcUUID!=desUUID&&!isSrcGroup&&!isDesGroup) {
 				switch (SharedObject.buttonMode) {
 				case associationLineMode: {
 					newLine = new AssociationLine(srcUUID, desUUID, srcPort, desPort, false,

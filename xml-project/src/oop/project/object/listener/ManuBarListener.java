@@ -1,5 +1,6 @@
 package oop.project.object.listener;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +20,8 @@ public class ManuBarListener implements ActionListener {
 			case "group": {
 				ObjectBase ob =new GroupObject(SharedObject.lines,SharedObject.shapes);
 				SharedObject.shapes.add(ob);
+				SharedObject.sao.setSrc(new Point(0,0));
+				SharedObject.sao.setDes(new Point(0,0));
 //				System.out.println(e.getActionCommand());
 				break;
 			}

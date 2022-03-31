@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 import javax.swing.JOptionPane;
 
@@ -96,6 +96,7 @@ public class GroupObject extends ObjectBase {
 		setPosition(minPos.x, minPos.y);
 		setWidth(maxPos.x - minPos.x);
 		setHeight(maxPos.y - minPos.y);
+		setIsGroup(true);
 		
 	
 		SharedObject.getDrawPanel().repaint();

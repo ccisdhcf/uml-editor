@@ -25,6 +25,7 @@ public abstract class ObjectBase extends JComponent {
 	private int borderGap = 5;
 	private int connectionPortSize = 10;
 	private String uuid;
+	private boolean isGroup=false;
 	/*
 	 * *port?????
 	 */
@@ -54,6 +55,9 @@ public abstract class ObjectBase extends JComponent {
 		positionX = x;
 		positionY = y;
 	}
+	public void setIsGroup(boolean _isGroup) {
+		isGroup=_isGroup;
+	}
 
 	public void setName(String newName) {
 		name = newName;
@@ -78,7 +82,9 @@ public abstract class ObjectBase extends JComponent {
 	public String getUUID() {
 		return uuid;
 	}
-
+	public boolean getIsGroup() {
+		return isGroup;
+	}
 	public String getName() {
 		return name;
 	}
