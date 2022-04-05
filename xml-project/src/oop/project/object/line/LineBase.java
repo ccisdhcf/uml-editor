@@ -55,22 +55,22 @@ public abstract class LineBase extends JComponent {
 		desUUID=_desUUID;
 		srcPort=_srcPort;
 		desPort=_desPort;
-		getPosFromUUID(srcUUID, desUUID, srcPort, desPort);
+		getPosFromUUID(srcUUID, desUUID, srcPort, desPort,SharedObject.shapes);
 		type = _type;
 		selected = _selected;
 	}
-	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
-		for (ObjectBase ob:SharedObject.shapes) {
-			if (ob.getUUID().equals(_srcUUID)) {
-				srcPositionX=ob.getPortPosX(_srcPort);
-				srcPositionY=ob.getPortPosY(_srcPort);
-			}
-			else if (ob.getUUID().equals(_desUUID)) {
-				desPositionX=ob.getPortPosX(_desPort);
-				desPositionY=ob.getPortPosY(_desPort);
-			}
-		}
-	}
+//	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
+//		for (ObjectBase ob:SharedObject.shapes) {
+//			if (ob.getUUID().equals(_srcUUID)) {
+//				srcPositionX=ob.getPortPosX(_srcPort);
+//				srcPositionY=ob.getPortPosY(_srcPort);
+//			}
+//			else if (ob.getUUID().equals(_desUUID)) {
+//				desPositionX=ob.getPortPosX(_desPort);
+//				desPositionY=ob.getPortPosY(_desPort);
+//			}
+//		}
+//	}
 	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,ArrayList<ObjectBase> _obList) {
 		for (ObjectBase ob:_obList) {
 			if (ob.getUUID().equals(_srcUUID)) {

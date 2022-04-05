@@ -19,32 +19,32 @@ public class GroupObject extends ObjectBase {
 
 	private ArrayList<ObjectBase> allObjects = new ArrayList<ObjectBase>();
 	private ArrayList<Point> allObjectShift = new ArrayList<Point>();
-	private ArrayList<LineBase> allLines = new ArrayList<LineBase>();
+//	private ArrayList<LineBase> allLines = new ArrayList<LineBase>();
 	private Point objPoint = new Point();
 //	private ArrayList<GroupObject> allGroupedObjects = new ArrayList<GroupObject>();
 
 	public GroupObject() {
 		// TODO Auto-generated constructor stub
 //		allGroupedObjects = null;
-		allLines = null;
+//		allLines = null;
 		allObjects = null;
 	}
 
-	public GroupObject(ArrayList<LineBase> _allLines,
-			ArrayList<ObjectBase> _allObjects/* ,ArrayList<GroupObject> _allGroupedObjects */) {
+	public GroupObject(String _name /*ArrayList<LineBase> _allLines,
+			ArrayList<ObjectBase> _allObjects ,ArrayList<GroupObject> _allGroupedObjects */) {
 		super(); // object Init constructor,only have uuid
 		
 		Point minPos = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
 		Point maxPos = new Point(Integer.MIN_VALUE, Integer.MIN_VALUE);
-		for (LineBase lb : _allLines) {
-			if (lb.getSelected()) {
-				allLines.add(lb);
-			}
-		}
-		for (LineBase lb : allLines) {
-			SharedObject.lines.remove(lb);
-		}
-		for (ObjectBase ob : _allObjects) {
+//		for (LineBase lb : _allLines) {
+//			if (lb.getSelected()) {
+//				allLines.add(lb);
+//			}
+//		}
+//		for (LineBase lb : allLines) {
+//			SharedObject.lines.remove(lb);
+//		}
+		for (ObjectBase ob : SharedObject.shapes) {
 			if (ob.getSelectedStatic()) {
 				ob.setSelected(false);
 				allObjects.add(ob);
@@ -65,9 +65,9 @@ public class GroupObject extends ObjectBase {
 
 			}
 		}
-		for (ObjectBase ob : allObjects) {
-			SharedObject.shapes.remove(ob);
-		}
+//		for (ObjectBase ob : allObjects) {
+//			SharedObject.shapes.remove(ob);
+//		}
 //		for(GroupObject go:_allGroupedObjects) {
 //			if (go.getSelectedStatic()) {
 //				allGroupedObjects.add(go);
@@ -86,8 +86,8 @@ public class GroupObject extends ObjectBase {
 //				}
 //			}
 //		}
-		String name = JOptionPane.showInputDialog(SharedObject.getDrawPanel(), "enter name", "name", 3);
-		setName(name);
+		
+		setName(_name);
 		objPoint.setLocation(minPos);
 		for (ObjectBase ob : allObjects) {
 			System.out.println("ob: " + ob.getName());
@@ -104,30 +104,35 @@ public class GroupObject extends ObjectBase {
 	}
 
 	public void ungroup() {
-		for (ObjectBase ob : allObjects) {
-			ob.setSelected(true);
-			SharedObject.shapes.add(ob);
-			
-		}
-		for (LineBase lb : allLines) {
-			SharedObject.lines.add(lb);
-		}
+//		for (ObjectBase ob : allObjects) {
+//			ob.setSelected(true);
+//			SharedObject.shapes.add(ob);
+//			
+//		}
+//		for (LineBase lb : allLines) {
+//			SharedObject.lines.add(lb);
+//		}
 		SharedObject.shapes.remove(this);
 		SharedObject.getDrawPanel().repaint();
 	}
 
 	@Override
 	public void setPosition(int x, int y) {
+		
 		super.setPosition(x, y);
-		for (ObjectBase ob : allObjects) {
-			System.out.println("index: " + allObjects.indexOf(ob)+" "+allObjects.size());
-			ob.setPosition(allObjectShift.get(allObjects.indexOf(ob)).x + x,
-					allObjectShift.get(allObjects.indexOf(ob)).y + y);
-			// ob.setPosition(ob.getPosX()-objPoint.x+ x,ob.getPosY()-objPoint.y+ y );
-			System.out.println("x: " + ob.getPosX() + " " + super.getPosX() + " " + x);
-			System.out.println("y: " + ob.getPosY() + " " + super.getPosY() + " " + y);
+		for(ObjectBase ob:allObjects) {
+			int index=allObjects.indexOf(ob);
+			ob.setPosition(x+allObjectShift.get(index).x, y+allObjectShift.get(index).y);
 		}
-		for (LineBase lb : allLines) {
+//		for (ObjectBase ob : allObjects) {
+//			System.out.println("index: " + allObjects.indexOf(ob)+" "+allObjects.size());
+//			ob.setPosition(allObjectShift.get(allObjects.indexOf(ob)).x + x,
+//					allObjectShift.get(allObjects.indexOf(ob)).y + y);
+//			// ob.setPosition(ob.getPosX()-objPoint.x+ x,ob.getPosY()-objPoint.y+ y );
+//			System.out.println("x: " + ob.getPosX() + " " + super.getPosX() + " " + x);
+//			System.out.println("y: " + ob.getPosY() + " " + super.getPosY() + " " + y);
+//		}
+		for (LineBase lb : SharedObject.lines) {
 			lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(), allObjects);
 		}
 	}
@@ -145,15 +150,15 @@ public class GroupObject extends ObjectBase {
 	@Override
 	public void paintObject(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.black);
-		for (ObjectBase ob : allObjects) {
-			ob.printComponent(g);
-			
-		}
-		for (LineBase lb : allLines) {
-			lb.printComponent(g);
-		}
-		g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
+//		g.setColor(Color.black);
+//		for (ObjectBase ob : allObjects) {
+//			ob.printComponent(g);
+//			
+//		}
+//		for (LineBase lb : allLines) {
+//			lb.printComponent(g);
+//		}
+//		g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
 
 	}
 

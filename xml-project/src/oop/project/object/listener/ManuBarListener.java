@@ -18,23 +18,28 @@ public class ManuBarListener implements ActionListener {
 		if (SharedObject.buttonMode.equals(SharedObject.buttonModeEnum.selectMode)) {
 			switch (e.getActionCommand()) {
 			case "group": {
-				ObjectBase ob =new GroupObject(SharedObject.lines,SharedObject.shapes);
-				SharedObject.shapes.add(ob);
-				SharedObject.sao.setSrc(new Point(0,0));
-				SharedObject.sao.setDes(new Point(0,0));
+
+				String name = JOptionPane.showInputDialog(SharedObject.getDrawPanel(), "enter name", "name", 3);
+				if (name != null) {
+					ObjectBase ob = new GroupObject(name);
+					SharedObject.shapes.add(0,ob);
+					SharedObject.sao.setSrc(new Point(0, 0));
+					SharedObject.sao.setDes(new Point(0, 0));
 //				System.out.println(e.getActionCommand());
-				break;
+					break;
+				}
+
 			}
 			case "ungroup": {
 				ObjectBase unGroupOb = null;
-				int selectedCounter=0;
+				int selectedCounter = 0;
 				for (ObjectBase ob : SharedObject.shapes) {
 					if (ob.getSelectedStatic()) {
-						selectedCounter+=1;
-						unGroupOb=ob;
+						selectedCounter += 1;
+						unGroupOb = ob;
 					}
 				}
-				if (selectedCounter==1) {
+				if (selectedCounter == 1) {
 					unGroupOb.ungroup();
 				}
 //				System.out.println(e.getActionCommand());

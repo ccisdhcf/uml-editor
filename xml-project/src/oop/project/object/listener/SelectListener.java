@@ -122,7 +122,7 @@ public class SelectListener extends MouseAdapter {
 //			System.out.println("select drag " + e.getPoint().x + " " + e.getPoint().y + " " + shapeShift.x + " "
 //					+ shapeShift.y + " " + objectBase.getPosX() + " " + objectBase.getPosY() + " ");
 				for (LineBase lb : SharedObject.lines) {
-					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort());
+					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(),SharedObject.shapes);
 				}
 				SharedObject.getDrawPanel().repaint();
 			} else if (!IsPressPointAObj) {
