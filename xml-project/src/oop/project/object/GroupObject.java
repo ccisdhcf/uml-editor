@@ -44,7 +44,7 @@ public class GroupObject extends ObjectBase {
 //		for (LineBase lb : allLines) {
 //			SharedObject.lines.remove(lb);
 //		}
-		for (ObjectBase ob : SharedObject.shapes) {
+		for (ObjectBase ob : SharedObject.getInstance().shapes) {
 			if (ob.getSelectedStatic()) {
 				ob.setSelected(false);
 				allObjects.add(ob);
@@ -99,7 +99,7 @@ public class GroupObject extends ObjectBase {
 		setIsGroup(true);
 		
 	
-		SharedObject.getDrawPanel().repaint();
+		SharedObject.getInstance().getDrawPanel().repaint();
 
 	}
 
@@ -112,8 +112,8 @@ public class GroupObject extends ObjectBase {
 //		for (LineBase lb : allLines) {
 //			SharedObject.lines.add(lb);
 //		}
-		SharedObject.shapes.remove(this);
-		SharedObject.getDrawPanel().repaint();
+		SharedObject.getInstance().shapes.remove(this);
+		SharedObject.getInstance().getDrawPanel().repaint();
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class GroupObject extends ObjectBase {
 //			System.out.println("x: " + ob.getPosX() + " " + super.getPosX() + " " + x);
 //			System.out.println("y: " + ob.getPosY() + " " + super.getPosY() + " " + y);
 //		}
-		for (LineBase lb : SharedObject.lines) {
+		for (LineBase lb : SharedObject.getInstance().lines) {
 			lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(), allObjects);
 		}
 	}

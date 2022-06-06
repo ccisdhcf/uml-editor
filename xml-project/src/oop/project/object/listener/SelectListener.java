@@ -3,6 +3,9 @@ package oop.project.object.listener;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import layout.ButtonModeEnum;
+import layout.ButtonModeEnum.buttonModeEnum;
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 import oop.project.object.line.LineBase;
@@ -36,13 +39,13 @@ public class SelectListener extends MouseAdapter {
 		// TODO Auto-generated method stub
 		
 		IsPressPointAObj = false;
-		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.selectMode) {
-			SharedObject.resetSelected();
+		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.selectMode) {
+			SharedObject.getInstance().resetSelected();
 
-			for (ObjectBase ob : SharedObject.shapes) {
+			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.checkBorder(e.getX(), e.getY())) {
-					SharedObject.sao.setSrc(new Point(0, 0));
-					SharedObject.sao.setDes(new Point(0, 0));
+					SharedObject.getInstance().getSao().setSrc(new Point(0, 0));
+					SharedObject.getInstance().getSao().setDes(new Point(0, 0));
 					ob.setSelected(true);
 					objectBase = ob;
 					shapeShift = e.getPoint();
@@ -57,32 +60,32 @@ public class SelectListener extends MouseAdapter {
 			if (!IsPressPointAObj) {
 				selectAreaSrc = new Point(e.getPoint());
 
-				SharedObject.sao.setSrc(e.getPoint());
-				SharedObject.sao.setDes(e.getPoint());
+				SharedObject.getInstance().getSao().setSrc(e.getPoint());
+				SharedObject.getInstance().getSao().setDes(e.getPoint());
 				System.out.println(
-						" " + SharedObject.sao.getSrc().x + " " + SharedObject.sao.getSrc().y + " " + shapeShift);
+						" " + SharedObject.getInstance().getSao().getSrc().x + " " + SharedObject.getInstance().getSao().getSrc().y + " " + shapeShift);
 			}
 		}
 
-		SharedObject.getDrawPanel().repaint();
+		SharedObject.getInstance().getDrawPanel().repaint();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.selectMode && !IsPressPointAObj) {
+		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.selectMode && !IsPressPointAObj) {
 			selectAreaDes = new Point(e.getPoint());
-			for (ObjectBase ob : SharedObject.shapes) {
+			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.inArea(selectAreaSrc, selectAreaDes)) {
 					ob.setSelected(true);
 				}
 			}
-			for (LineBase lb : SharedObject.lines) {
+			for (LineBase lb : SharedObject.getInstance().lines) {
 				if (lb.inArea(selectAreaSrc, selectAreaDes)) {
 					lb.setSelected(true);
 				}
 			}
-			SharedObject.getDrawPanel().repaint();
+			SharedObject.getInstance().getDrawPanel().repaint();
 		}
 		objectBase = null;
 	}
@@ -103,7 +106,7 @@ public class SelectListener extends MouseAdapter {
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.selectMode) {
+		if (ButtonModeEnum.getInstance().getMode()== ButtonModeEnum.buttonModeEnum.selectMode) {
 			if (shapeShift != null && objectBase != null) {
 //				for (ObjectBase ob : SharedObject.shapes) {
 //				if (ob.checkBorder(e.getX(), e.getY())) {
@@ -121,14 +124,14 @@ public class SelectListener extends MouseAdapter {
 
 //			System.out.println("select drag " + e.getPoint().x + " " + e.getPoint().y + " " + shapeShift.x + " "
 //					+ shapeShift.y + " " + objectBase.getPosX() + " " + objectBase.getPosY() + " ");
-				for (LineBase lb : SharedObject.lines) {
-					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(),SharedObject.shapes);
+				for (LineBase lb : SharedObject.getInstance().lines) {
+					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(),SharedObject.getInstance().shapes);
 				}
-				SharedObject.getDrawPanel().repaint();
+				SharedObject.getInstance().getDrawPanel().repaint();
 			} else if (!IsPressPointAObj) {
 //				selectAreaDes=e.getPoint();
-				SharedObject.sao.setDes(e.getPoint());
-				SharedObject.getDrawPanel().repaint();
+				SharedObject.getInstance().getSao().setDes(e.getPoint());
+				SharedObject.getInstance().getDrawPanel().repaint();
 			}
 
 		}

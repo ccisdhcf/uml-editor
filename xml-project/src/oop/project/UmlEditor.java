@@ -4,7 +4,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import layout.ButtonBase;
-import oop.project.SharedObject.buttonModeEnum;
+import layout.ButtonModeEnum.buttonModeEnum;
+import layout.ButtonModeEnum;
 import oop.project.object.listener.LineListener;
 import oop.project.object.listener.ManuBarListener;
 import oop.project.object.listener.ObjectListener;
@@ -61,25 +62,25 @@ public class UmlEditor {
 		frame.getContentPane().add(panel, BorderLayout.WEST);
 		panel.setLayout(new GridLayout(6, 0, 0, 0));
 
-		ButtonBase selectButton = new ButtonBase("select", SharedObject.buttonModeEnum.selectMode);
+		ButtonBase selectButton = new ButtonBase("select", ButtonModeEnum.buttonModeEnum.selectMode);
 		panel.add(selectButton);
 
 		ButtonBase associationLineButton = new ButtonBase("association line",
-				SharedObject.buttonModeEnum.associationLineMode);
+				ButtonModeEnum.buttonModeEnum.associationLineMode);
 		panel.add(associationLineButton);
 
 		ButtonBase generalizationLineButton = new ButtonBase("generalization line",
-				SharedObject.buttonModeEnum.generalizationLineMode);
+				ButtonModeEnum.buttonModeEnum.generalizationLineMode);
 		panel.add(generalizationLineButton);
 
 		ButtonBase compositionLineButton = new ButtonBase("composition line",
-				SharedObject.buttonModeEnum.compositionLineMode);
+				ButtonModeEnum.buttonModeEnum.compositionLineMode);
 		panel.add(compositionLineButton);
 
-		ButtonBase classButton = new ButtonBase("class", SharedObject.buttonModeEnum.classMode);
+		ButtonBase classButton = new ButtonBase("class", ButtonModeEnum.buttonModeEnum.classMode);
 		panel.add(classButton);
 
-		ButtonBase useCaseButton = new ButtonBase("use case", SharedObject.buttonModeEnum.useCaseMode);
+		ButtonBase useCaseButton = new ButtonBase("use case", ButtonModeEnum.buttonModeEnum.useCaseMode);
 		panel.add(useCaseButton);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -122,27 +123,27 @@ public class UmlEditor {
 //		SharedObject.lines.add(test3);
 
 		frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
-		SharedObject.buttomList.add(selectButton);
-		SharedObject.buttomList.add(associationLineButton);
-		SharedObject.buttomList.add(generalizationLineButton);
-		SharedObject.buttomList.add(compositionLineButton);
-		SharedObject.buttomList.add(classButton);
-		SharedObject.buttomList.add(useCaseButton);
-		for (JButton buttonSelected : SharedObject.buttomList) {
+		SharedObject.getInstance().buttomList.add(selectButton);
+		SharedObject.getInstance().buttomList.add(associationLineButton);
+		SharedObject.getInstance().buttomList.add(generalizationLineButton);
+		SharedObject.getInstance().buttomList.add(compositionLineButton);
+		SharedObject.getInstance().buttomList.add(classButton);
+		SharedObject.getInstance().buttomList.add(useCaseButton);
+		for (JButton buttonSelected : SharedObject.getInstance().buttomList) {
 			buttonSelected.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					SharedObject.resetSelected();
-					for (JButton jbutton : SharedObject.buttomList) {
+					SharedObject.getInstance().resetSelected();
+					for (JButton jbutton : SharedObject.getInstance().buttomList) {
 						jbutton.setBackground(Color.lightGray);
 						jbutton.setForeground(Color.black);
 					}
 					buttonSelected.setBackground(Color.black);
 					buttonSelected.setForeground(Color.white);
-					SharedObject.buttonMode = buttonModeEnum.values()[SharedObject.buttomList.indexOf(buttonSelected)];
+					ButtonModeEnum.getInstance().setMode(buttonModeEnum.values()[SharedObject.getInstance().buttomList.indexOf(buttonSelected)]); 
 					// debug
-					System.out.println(SharedObject.buttonMode.name());
+					System.out.println(ButtonModeEnum.getInstance().getMode().name());
 				}
 			});
 
@@ -153,8 +154,8 @@ public class UmlEditor {
 		layeredPane.addMouseListener(SL);
 		layeredPane.addMouseMotionListener(SL);
 
-		SharedObject.setFrameJPanel(panel);
-		SharedObject.setDrawPanel(layeredPane);
+		SharedObject.getInstance().setFrameJPanel(panel);
+		SharedObject.getInstance().setDrawPanel(layeredPane);
 
 	}
 

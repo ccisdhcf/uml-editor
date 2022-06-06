@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
+
+import layout.ButtonModeEnum;
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 import oop.project.object.ObjectBase.port;
@@ -25,7 +27,7 @@ public abstract class LineBase extends JComponent {
 	private ObjectBase.port srcPort;
 	private ObjectBase.port desPort;
 	private boolean selected;
-	private SharedObject.buttonModeEnum type;
+	private ButtonModeEnum.buttonModeEnum type;
 
 	public LineBase() {
 		srcPositionX = 0;
@@ -37,11 +39,11 @@ public abstract class LineBase extends JComponent {
 		srcPort=port.nullMode;
 		desPort=port.nullMode;
 		selected = false;
-		type = SharedObject.buttonModeEnum.nullMode;
+		type = ButtonModeEnum.buttonModeEnum.nullMode;
 	}
 
 	public LineBase(int _srcPositionX, int _srcPositionY, int _desPositionX, int _desPositionY, boolean _selected,
-			SharedObject.buttonModeEnum _type) {
+			ButtonModeEnum.buttonModeEnum _type) {
 		srcPositionX = _srcPositionX;
 		srcPositionY = _srcPositionY;
 		desPositionX = _desPositionX;
@@ -50,12 +52,12 @@ public abstract class LineBase extends JComponent {
 		selected = _selected;
 	}	
 	public LineBase(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort, boolean _selected,
-			SharedObject.buttonModeEnum _type) {
+			ButtonModeEnum.buttonModeEnum _type) {
 		srcUUID=_srcUUID;
 		desUUID=_desUUID;
 		srcPort=_srcPort;
 		desPort=_desPort;
-		getPosFromUUID(srcUUID, desUUID, srcPort, desPort,SharedObject.shapes);
+		getPosFromUUID(srcUUID, desUUID, srcPort, desPort,SharedObject.getInstance().shapes);
 		type = _type;
 		selected = _selected;
 	}
@@ -97,7 +99,7 @@ public abstract class LineBase extends JComponent {
 		selected = _selected;
 	}
 
-	public void setType(SharedObject.buttonModeEnum _type) {
+	public void setType(ButtonModeEnum.buttonModeEnum _type) {
 		type = _type;
 	}
 
@@ -132,7 +134,7 @@ public abstract class LineBase extends JComponent {
 	public ObjectBase.port getDesPort() {
 		return desPort;
 	}
-	public SharedObject.buttonModeEnum getType() {
+	public ButtonModeEnum.buttonModeEnum getType() {
 		return type;
 	}
 

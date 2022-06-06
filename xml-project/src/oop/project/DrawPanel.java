@@ -18,13 +18,13 @@ public class DrawPanel extends JLayeredPane {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (ObjectBase shape:SharedObject.shapes) {
+		for (ObjectBase shape:SharedObject.getInstance().shapes) {
 			shape.printComponent(g);
 		}
-		for (LineBase line:SharedObject.lines) {
+		for (LineBase line:SharedObject.getInstance().lines) {
 			line.printComponent(g);
 		}
-		SharedObject.sao.printComponent(g);
+		SharedObject.getInstance().getSao().printComponent(g);
 //		g.drawLine(100, 100, 1500, 1000);	
 //		g.setColor(Color.black);
 //		int paintSlice=3;

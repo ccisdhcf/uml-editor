@@ -2,6 +2,7 @@ package oop.project.object.line;
 
 import java.awt.Graphics;
 
+import layout.ButtonModeEnum;
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 
@@ -18,11 +19,11 @@ public class CompositionLine extends LineBase{
 		// TODO Auto-generated constructor stub
 	}
 	public CompositionLine(int _srcPositionX, int _srcPositionY, int _desPositionX, int _desPositionY, boolean _selected,
-			SharedObject.buttonModeEnum _type) {
+			ButtonModeEnum.buttonModeEnum _type) {
 		super(_srcPositionX,_srcPositionY,_desPositionX,_desPositionY,_selected,_type);	
 	}
 	public CompositionLine(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,
-			boolean _selected, SharedObject.buttonModeEnum _type) {
+			boolean _selected, ButtonModeEnum.buttonModeEnum _type) {
 		super(_srcUUID, _desUUID, _srcPort, _desPort, _selected, _type);
 	}
 	@Override

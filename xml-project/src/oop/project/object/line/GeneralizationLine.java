@@ -2,7 +2,8 @@ package oop.project.object.line;
 
 import java.awt.Graphics;
 
-import oop.project.SharedObject;
+import layout.ButtonModeEnum;
+
 import oop.project.object.ObjectBase;
 
 public class GeneralizationLine extends LineBase {
@@ -21,12 +22,12 @@ public class GeneralizationLine extends LineBase {
 	}
 
 	public GeneralizationLine(int _srcPositionX, int _srcPositionY, int _desPositionX, int _desPositionY,
-			boolean _selected, SharedObject.buttonModeEnum _type) {
+			boolean _selected, ButtonModeEnum.buttonModeEnum _type) {
 		super(_srcPositionX, _srcPositionY, _desPositionX, _desPositionY, _selected, _type);
 	}
 
 	public GeneralizationLine(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,
-			boolean _selected, SharedObject.buttonModeEnum _type) {
+			boolean _selected, ButtonModeEnum.buttonModeEnum _type) {
 		super(_srcUUID, _desUUID, _srcPort, _desPort, _selected, _type);
 	}
 

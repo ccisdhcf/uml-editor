@@ -2,7 +2,6 @@ package oop.project;
 
 import java.util.ArrayList;
 
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -11,48 +10,64 @@ import oop.project.object.SelectAreaObject;
 import oop.project.object.line.LineBase;
 
 public class SharedObject {
-	public static ArrayList<JButton> buttomList=new ArrayList<>();
-	public static ArrayList<ObjectBase> shapes=new ArrayList<>();
-	public static ArrayList<LineBase> lines=new ArrayList<>();
 
-	// new mode ->add before null mode
-	public enum buttonModeEnum {
-		selectMode, associationLineMode, generalizationLineMode, compositionLineMode, classMode, useCaseMode, nullMode
+	private static SharedObject instance;
+
+	private SharedObject() {
 	}
 
-	static JPanel frameJPanel;
-	static DrawPanel drawPanel;
-	public static buttonModeEnum buttonMode;
+	public static SharedObject getInstance() {
+		if (instance == null) {
+			instance = new SharedObject();
+		}
+		return instance;
+	}
+
+	public  ArrayList<JButton> buttomList = new ArrayList<>();
+	public  ArrayList<ObjectBase> shapes = new ArrayList<>();
+	public  ArrayList<LineBase> lines = new ArrayList<>();
+
+	
+
+
+	private static JPanel frameJPanel;
+	private static DrawPanel drawPanel;
+
 
 	static public void init() {
-//		buttomList = new ArrayList<>();
-//		shapes = new ArrayList<>();
-//		lines = new ArrayList<>();
-		buttonMode = buttonModeEnum.nullMode;
-
 	}
-	static public SelectAreaObject sao=new SelectAreaObject();
-	static public DrawPanel getDrawPanel() {
+
+	public SelectAreaObject sao = new SelectAreaObject();
+
+	public  DrawPanel getDrawPanel() {
 		return drawPanel;
 	}
 
-	static public JPanel getFrameJPanel() {
+	public  JPanel getFrameJPanel() {
 		return frameJPanel;
 	}
 
-	static public void setDrawPanel(DrawPanel _dp) {
+	public  void setDrawPanel(DrawPanel _dp) {
 		drawPanel = _dp;
 
 	}
 
-	static public void setFrameJPanel(JPanel _frame) {
+	public  void setFrameJPanel(JPanel _frame) {
 		frameJPanel = _frame;
 	}
 
-	static public void resetSelected() {
+	public  void resetSelected() {
 		for (ObjectBase shape : shapes) {
 			shape.setSelected(false);
 		}
+	}
+
+	public SelectAreaObject getSao() {
+		return sao;
+	}
+
+	public void setSao(SelectAreaObject sao) {
+		this.sao = sao;
 	}
 
 }

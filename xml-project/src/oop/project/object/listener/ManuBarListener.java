@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import layout.ButtonModeEnum;
 import oop.project.SharedObject;
 import oop.project.object.GroupObject;
 import oop.project.object.ObjectBase;
@@ -15,16 +16,16 @@ public class ManuBarListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (SharedObject.buttonMode.equals(SharedObject.buttonModeEnum.selectMode)) {
+		if (ButtonModeEnum.getInstance().getMode().equals(ButtonModeEnum.buttonModeEnum.selectMode)) {
 			switch (e.getActionCommand()) {
 			case "group": {
 
-				String name = JOptionPane.showInputDialog(SharedObject.getDrawPanel(), "enter name", "name", 3);
+				String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
 				if (name != null) {
 					ObjectBase ob = new GroupObject(name);
-					SharedObject.shapes.add(0,ob);
-					SharedObject.sao.setSrc(new Point(0, 0));
-					SharedObject.sao.setDes(new Point(0, 0));
+					SharedObject.getInstance().shapes.add(0,ob);
+					SharedObject.getInstance().getSao().setSrc(new Point(0, 0));
+					SharedObject.getInstance().getSao().setDes(new Point(0, 0));
 //				System.out.println(e.getActionCommand());
 					break;
 				}
@@ -33,7 +34,7 @@ public class ManuBarListener implements ActionListener {
 			case "ungroup": {
 				ObjectBase unGroupOb = null;
 				int selectedCounter = 0;
-				for (ObjectBase ob : SharedObject.shapes) {
+				for (ObjectBase ob : SharedObject.getInstance().shapes) {
 					if (ob.getSelectedStatic()) {
 						selectedCounter += 1;
 						unGroupOb = ob;
@@ -46,14 +47,14 @@ public class ManuBarListener implements ActionListener {
 				break;
 			}
 			case "change name": {
-				for (ObjectBase ob : SharedObject.shapes) {
+				for (ObjectBase ob : SharedObject.getInstance().shapes) {
 					if (ob.getSelectedStatic()) {
-						String name = JOptionPane.showInputDialog(SharedObject.getDrawPanel(), "enter name", "name", 3);
+						String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
 						ob.setName(name);
 						break;
 					}
 				}
-				SharedObject.getDrawPanel().repaint();
+				SharedObject.getInstance().getDrawPanel().repaint();
 //				System.out.println(e.getActionCommand());
 				break;
 			}

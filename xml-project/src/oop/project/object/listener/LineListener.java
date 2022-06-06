@@ -2,6 +2,8 @@ package oop.project.object.listener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import layout.ButtonModeEnum;
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 import oop.project.object.line.AssociationLine;
@@ -45,12 +47,12 @@ public class LineListener implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		System.out.println("mousePressed " + e.getX() + " " + e.getY());
 		// TODO Auto-generated method stub
-		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.associationLineMode
-				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.compositionLineMode
-				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.generalizationLineMode) {
+		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.associationLineMode
+				|| ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.compositionLineMode
+				|| ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.generalizationLineMode) {
 			srcX = e.getX();
 			srcY = e.getY();
-			for (ObjectBase ob : SharedObject.shapes) {
+			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.checkBorder(srcX, srcY)) {
 					srcUUID = ob.getUUID();
 					srcPort = ob.getNearestPort(srcX, srcY);
@@ -64,12 +66,13 @@ public class LineListener implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		System.out.println("mouseReleased " + e.getX() + " " + e.getY());
-		if (SharedObject.buttonMode == SharedObject.buttonModeEnum.associationLineMode
-				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.compositionLineMode
-				|| SharedObject.buttonMode == SharedObject.buttonModeEnum.generalizationLineMode) {
+		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.associationLineMode
+				|| ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.compositionLineMode
+				|| ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.generalizationLineMode) {
 			desX = e.getX();
 			desY = e.getY();
-			for (ObjectBase ob : SharedObject.shapes) {
+			desUUID="";
+			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.checkBorder(desX, desY)) {
 					desUUID = ob.getUUID();
 					desPort = ob.getNearestPort(desX, desY);
@@ -77,29 +80,29 @@ public class LineListener implements MouseListener {
 				}
 			}
 			LineBase newLine;
-			if (srcUUID!=desUUID&&!isSrcGroup&&!isDesGroup) {
-				switch (SharedObject.buttonMode) {
+			if (srcUUID!=desUUID&&!isSrcGroup&&!isDesGroup&&desUUID!="") {
+				switch (ButtonModeEnum.getInstance().getMode()) {
 				case associationLineMode: {
 					newLine = new AssociationLine(srcUUID, desUUID, srcPort, desPort, false,
-							SharedObject.buttonMode);
+							ButtonModeEnum.getInstance().getMode());
 					break;
 				}
 				case generalizationLineMode: {
 					newLine = new GeneralizationLine(srcUUID, desUUID, srcPort, desPort, false,
-							SharedObject.buttonMode);
+							ButtonModeEnum.getInstance().getMode());
 					break;
 				}
 				case compositionLineMode: {
 					newLine = new CompositionLine(srcUUID, desUUID, srcPort, desPort, false,
-							SharedObject.buttonMode);
+							ButtonModeEnum.getInstance().getMode());
 					break;
 				}
 
 				default:
-					throw new IllegalArgumentException("Unexpected value: " + SharedObject.buttonMode);
+					throw new IllegalArgumentException("Unexpected value: " + ButtonModeEnum.getInstance().getMode());
 				}
-				SharedObject.lines.add(newLine);
-				SharedObject.getDrawPanel().repaint();
+				SharedObject.getInstance().lines.add(newLine);
+				SharedObject.getInstance().getDrawPanel().repaint();
 			}
 		
 		}

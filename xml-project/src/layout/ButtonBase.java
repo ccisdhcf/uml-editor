@@ -6,7 +6,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import oop.project.SharedObject;
+
 
 public class ButtonBase extends JButton {
 	/**
@@ -15,16 +15,16 @@ public class ButtonBase extends JButton {
 	private static final long serialVersionUID = 5685964380797188013L;
 	
 	@SuppressWarnings("unused")
-	private SharedObject.buttonModeEnum buttonMode;
+	private ButtonModeEnum.buttonModeEnum buttonMode;
 
 	public ButtonBase() {
 		super();
-		buttonMode = SharedObject.buttonModeEnum.nullMode;
+		buttonMode = ButtonModeEnum.buttonModeEnum.nullMode;
 
 		// TODO Auto-generated constructor stub
 	}
 
-	public ButtonBase(String _ButtonName, SharedObject.buttonModeEnum _buttonMode) {
+	public ButtonBase(String _ButtonName, ButtonModeEnum.buttonModeEnum _buttonMode) {
 		super();
 		buttonMode = _buttonMode;
 
