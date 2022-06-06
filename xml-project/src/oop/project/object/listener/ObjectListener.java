@@ -4,8 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 
-import layout.ButtonModeEnum;
-import layout.ButtonModeEnum.buttonModeEnum;
+import oop.project.object.button.ButtonMode;
 import oop.project.SharedObject;
 import oop.project.object.ClassObject;
 import oop.project.object.ObjectBase;
@@ -16,14 +15,14 @@ public class ObjectListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (ButtonModeEnum.getInstance().getMode()== ButtonModeEnum.buttonModeEnum.classMode
-				|| ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.useCaseMode) {
+		if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.classMode
+				|| ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.useCaseMode) {
 			String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
 //			System.out.println(e.getX() + " " + e.getY() + " " + name + " " + SharedObject.buttonModeSelected);
 			ObjectBase newObject = null;
-			if (ButtonModeEnum.getInstance().getMode()== ButtonModeEnum.buttonModeEnum.classMode) {
+			if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.classMode) {
 				newObject = new ClassObject(e.getX(), e.getY(), 50, 50, false, name);
-			} else if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.useCaseMode) {
+			} else if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.useCaseMode) {
 				newObject = new UseCaseObject(e.getX(), e.getY(), 50, 30, false, name);
 			}
 //			newObject.addMouseListener(new SelectListener());

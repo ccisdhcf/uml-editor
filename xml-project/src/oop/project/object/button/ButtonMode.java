@@ -1,12 +1,10 @@
-package layout;
+package oop.project.object.button;
 
-import oop.project.SharedObject;
-
-public class ButtonModeEnum {
-	private static ButtonModeEnum instance;
-	public static ButtonModeEnum getInstance() {
+public class ButtonMode {
+	private static ButtonMode instance;
+	public static ButtonMode getInstance() {
 		if (instance == null) {
-			instance = new ButtonModeEnum();
+			instance = new ButtonMode();
 		}
 		return instance;
 	}

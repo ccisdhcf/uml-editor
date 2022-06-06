@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import layout.ButtonModeEnum;
+import oop.project.object.button.ButtonMode;
 import oop.project.SharedObject;
 import oop.project.object.GroupObject;
 import oop.project.object.ObjectBase;
@@ -16,7 +16,7 @@ public class ManuBarListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if (ButtonModeEnum.getInstance().getMode().equals(ButtonModeEnum.buttonModeEnum.selectMode)) {
+		if (ButtonMode.getInstance().getMode().equals(ButtonMode.buttonModeEnum.selectMode)) {
 			switch (e.getActionCommand()) {
 			case "group": {
 

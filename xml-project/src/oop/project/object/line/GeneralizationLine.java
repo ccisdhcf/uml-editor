@@ -2,8 +2,7 @@ package oop.project.object.line;
 
 import java.awt.Graphics;
 
-import layout.ButtonModeEnum;
-
+import oop.project.object.button.ButtonMode;
 import oop.project.object.ObjectBase;
 
 public class GeneralizationLine extends LineBase {
@@ -22,34 +21,35 @@ public class GeneralizationLine extends LineBase {
 	}
 
 	public GeneralizationLine(int _srcPositionX, int _srcPositionY, int _desPositionX, int _desPositionY,
-			boolean _selected, ButtonModeEnum.buttonModeEnum _type) {
+			boolean _selected, ButtonMode.buttonModeEnum _type) {
 		super(_srcPositionX, _srcPositionY, _desPositionX, _desPositionY, _selected, _type);
 	}
 
 	public GeneralizationLine(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,
-			boolean _selected, ButtonModeEnum.buttonModeEnum _type) {
+			boolean _selected, ButtonMode.buttonModeEnum _type) {
 		super(_srcUUID, _desUUID, _srcPort, _desPort, _selected, _type);
 	}
 
 	@Override
 	public void printObject(Graphics g) {
 		// TODO Auto-generated method stub
-		double tan = (double) (getSrcPosY() - getDesPosY()) / (getSrcPosX() - getDesPosX());
+		double tan = (double) (getSrcPos().getY() - getDesPos().getY()) / (getSrcPos().getX() - getDesPos().getX());
 		double arctan = Math.atan(tan);
 		// System.out.println(tan+" "+arctan);
 		int arrowX = (int) (arrowLen * Math.cos(arctan + Math.toRadians(arrowDegree)));
 		int arrowY = (int) (arrowLen * Math.sin(arctan + Math.toRadians(arrowDegree)));
 		int arrowX2 = (int) (arrowLen * Math.cos(arctan - Math.toRadians(arrowDegree)));
 		int arrowY2 = (int) (arrowLen * Math.sin(arctan - Math.toRadians(arrowDegree)));
-		int sign = getDesPosX() > getSrcPosX() ? -1 : 1;
-		g.drawLine(getSrcPosX(), getSrcPosY(), getDesPosX() + sign * (arrowX + arrowX2) / 2,
-				getDesPosY() + sign * (arrowY + arrowY2) / 2);
+		int sign = getDesPos().getX() > getSrcPos().getX() ? -1 : 1;
+		g.drawLine((int) getSrcPos().getX(), (int) getSrcPos().getY(),
+				(int) (getDesPos().getX() + sign * (arrowX + arrowX2) / 2),
+				(int) (getDesPos().getY() + sign * (arrowY + arrowY2) / 2));
 
-		g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() + sign * arrowX, getDesPosY() + sign * arrowY);
+		g.drawLine((int)getDesPos().getX(), (int)getDesPos().getY(),(int)( getDesPos().getX() + sign * arrowX),(int)( getDesPos().getY() + sign * arrowY));
 
-		g.drawLine(getDesPosX(), getDesPosY(), getDesPosX() + sign * arrowX2, getDesPosY() + sign * arrowY2);
-		g.drawLine(getDesPosX() + sign * arrowX, getDesPosY() + sign * arrowY, getDesPosX() + sign * arrowX2,
-				getDesPosY() + sign * arrowY2);
+		g.drawLine((int)getDesPos().getX(),(int) getDesPos().getY(),(int) (getDesPos().getX() + sign * arrowX2),(int)( getDesPos().getY() + sign * arrowY2));
+		g.drawLine((int)(getDesPos().getX() + sign * arrowX),(int)( getDesPos().getY() + sign * arrowY),(int)( getDesPos().getX() + sign * arrowX2),
+				(int)(getDesPos().getY() + sign * arrowY2));
 
 	}
 

@@ -16,8 +16,9 @@ public abstract class ObjectBase extends JComponent {
 		up, down, left, right, nullMode
 	};
 
-	private int positionX;
-	private int positionY;
+//	private int positionX;
+//	private int positionY;
+	private Point position;
 	private int width;
 	private int height;
 	private boolean selected;
@@ -25,14 +26,15 @@ public abstract class ObjectBase extends JComponent {
 	private int borderGap = 5;
 	private int connectionPortSize = 10;
 	private String uuid;
-	private boolean isGroup=false;
+	private boolean isGroup = false;
 	/*
 	 * *port?????
 	 */
 
 	public ObjectBase() {
-		positionX = 0;
-		positionY = 0;
+		position.setLocation(0, 0);
+		;
+
 		width = 0;
 		height = 0;
 		selected = false;
@@ -42,8 +44,9 @@ public abstract class ObjectBase extends JComponent {
 	}
 
 	public ObjectBase(int _positionX, int _positionY, int _width, int _height, boolean _selected, String _name) {
-		positionX = _positionX;
-		positionY = _positionY;
+//		positionX = _positionX;
+//		positionY = _positionY;
+		position.setLocation(_positionX, _positionY);
 		width = _width;
 		height = _height;
 		selected = _selected;
@@ -52,11 +55,13 @@ public abstract class ObjectBase extends JComponent {
 	}
 
 	public void setPosition(int x, int y) {
-		positionX = x;
-		positionY = y;
+//		positionX = x;
+//		positionY = y;
+		position.setLocation(x, y);
 	}
+
 	public void setIsGroup(boolean _isGroup) {
-		isGroup=_isGroup;
+		isGroup = _isGroup;
 	}
 
 	public void setName(String newName) {
@@ -82,9 +87,11 @@ public abstract class ObjectBase extends JComponent {
 	public String getUUID() {
 		return uuid;
 	}
+
 	public boolean getIsGroup() {
 		return isGroup;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -94,11 +101,11 @@ public abstract class ObjectBase extends JComponent {
 	}
 
 	public int getPosX() {
-		return positionX;
+		return (int) position.getX();
 	}
 
 	public int getPosY() {
-		return positionY;
+		return (int) position.getY();
 	}
 
 	public int getObjectWidth() {
@@ -112,20 +119,20 @@ public abstract class ObjectBase extends JComponent {
 	public boolean inArea(Point src, Point des) {
 		Point minPoint = new Point(src.x < des.x ? src.x : des.x, src.y < des.y ? src.y : des.y);
 		Point maxPoint = new Point(src.x > des.x ? src.x : des.x, src.y > des.y ? src.y : des.y);
-		if (minPoint.x < positionX && minPoint.y < positionY && maxPoint.x > (positionX + width)
-				&& maxPoint.y > (positionY + height)) {
+		if (minPoint.x < position.getX() && minPoint.y < position.getY() && maxPoint.x > (position.getX() + width)
+				&& maxPoint.y > (position.getY() + height)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	public void shiftObject(int x,int y) {
-		positionX=positionX+x;
-		positionY=positionY+y;
-	}
+//	public void shiftObject(int x,int y) {
+//		positionX=positionX+x;
+//		positionY=positionY+y;
+//	}
 
 	public boolean checkBorder(int x, int y) {
-		if (positionX < x && x < positionX + width && positionY < y && y < positionY + height) {
+		if (position.getX() < x && x < position.getX() + width && position.getY() < y && y < position.getY() + height) {
 			return true;
 		}
 		return false;
@@ -133,8 +140,8 @@ public abstract class ObjectBase extends JComponent {
 
 	public port getNearestPort(int x, int y) {
 		// 2 diagonal
-		int d1 = height * (x - positionX) - width * (y - positionY);
-		int d2 = height * (x - positionX) + width * (y - positionY - height);
+		int d1 = (int) (height * (x - position.getX()) - width * (y - position.getY()));
+		int d2 = (int) (height * (x - position.getX()) + width * (y - position.getY() - height));
 		if (d1 >= 0) {
 			if (d2 >= 0) {
 				return port.right;
@@ -150,44 +157,68 @@ public abstract class ObjectBase extends JComponent {
 		}
 	}
 
-	public int getPortPosX(port p) {
+	public Point getPortPos(port p) {
+		Point point = null;
 		switch (p) {
 		case up: {
-			return positionX + width / 2;
+			point.setLocation(position.getX() + width / 2, position.getY());
+			break;
 		}
 		case down: {
-			return positionX + width / 2;
+			point.setLocation(position.getX() + width / 2, position.getY() + height);
+			break;
 		}
 		case left: {
-			return positionX;
+			point.setLocation(position.getX(), position.getY() + height / 2);
+			break;
 		}
 		case right: {
-			return positionX + width;
+			point.setLocation(position.getX() + width, position.getY() + height / 2);
+			break;
 		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + p);
 		}
-
+		return point;
 	}
-
-	public int getPortPosY(port p) {
-		switch (p) {
-		case up: {
-			return positionY;
-		}
-		case down: {
-			return positionY + height;
-		}
-		case left: {
-			return positionY + height / 2;
-		}
-		case right: {
-			return positionY + height / 2;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + p);
-		}
-	}
+//	public int getPortPosX(port p) {
+//		switch (p) {
+//		case up: {
+//			return positionX + width / 2;
+//		}
+//		case down: {
+//			return positionX + width / 2;
+//		}
+//		case left: {
+//			return positionX;
+//		}
+//		case right: {
+//			return positionX + width;
+//		}
+//		default:
+//			throw new IllegalArgumentException("Unexpected value: " + p);
+//		}
+//
+//	}
+//
+//	public int getPortPosY(port p) {
+//		switch (p) {
+//		case up: {
+//			return positionY;
+//		}
+//		case down: {
+//			return positionY + height;
+//		}
+//		case left: {
+//			return positionY + height / 2;
+//		}
+//		case right: {
+//			return positionY + height / 2;
+//		}
+//		default:
+//			throw new IllegalArgumentException("Unexpected value: " + p);
+//		}
+//	}
 
 //	public void draw(Graphics g) {
 //		printComponent(g);
@@ -200,29 +231,30 @@ public abstract class ObjectBase extends JComponent {
 
 	public void paintBorder(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.drawRect(positionX - borderGap, positionY - borderGap, width + 2 * borderGap, height + 2 * borderGap);
+		g.drawRect((int) position.getX() - borderGap, (int) position.getY() - borderGap, width + 2 * borderGap,
+				height + 2 * borderGap);
 	}
 
 	public void paintConnectionPort(Graphics g) {
 		g.setColor(Color.cyan);
-		g.fillOval(positionX + width / 2 - connectionPortSize / 2, positionY - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
-		g.fillOval(positionX + width / 2 - connectionPortSize / 2, positionY + height - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
-		g.fillOval(positionX - connectionPortSize / 2, positionY + height / 2 - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
-		g.fillOval(positionX + width - connectionPortSize / 2, positionY + height / 2 - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
+		g.fillOval((int) position.getX() + width / 2 - connectionPortSize / 2,
+				(int) position.getY() - connectionPortSize / 2, connectionPortSize, connectionPortSize);
+		g.fillOval((int) position.getX() + width / 2 - connectionPortSize / 2,
+				(int) position.getY() + height - connectionPortSize / 2, connectionPortSize, connectionPortSize);
+		g.fillOval((int) position.getX() - connectionPortSize / 2,
+				(int) position.getY() + height / 2 - connectionPortSize / 2, connectionPortSize, connectionPortSize);
+		g.fillOval((int) position.getX() + width - connectionPortSize / 2,
+				(int) position.getY() + height / 2 - connectionPortSize / 2, connectionPortSize, connectionPortSize);
 		g.setColor(Color.BLACK);
-		g.drawOval(positionX + width / 2 - connectionPortSize / 2, positionY - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
+		g.drawOval((int) position.getX() + width / 2 - connectionPortSize / 2,
+				(int) position.getY() - connectionPortSize / 2, connectionPortSize, connectionPortSize);
 
-		g.drawOval(positionX + width / 2 - connectionPortSize / 2, positionY + height - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
-		g.drawOval(positionX - connectionPortSize / 2, positionY + height / 2 - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
-		g.drawOval(positionX + width - connectionPortSize / 2, positionY + height / 2 - connectionPortSize / 2,
-				connectionPortSize, connectionPortSize);
+		g.drawOval((int) position.getX() + width / 2 - connectionPortSize / 2,
+				(int) position.getY() + height - connectionPortSize / 2, connectionPortSize, connectionPortSize);
+		g.drawOval((int) position.getX() - connectionPortSize / 2,
+				(int) position.getY() + height / 2 - connectionPortSize / 2, connectionPortSize, connectionPortSize);
+		g.drawOval((int) position.getX() + width - connectionPortSize / 2,
+				(int) position.getY() + height / 2 - connectionPortSize / 2, connectionPortSize, connectionPortSize);
 	}
 
 	@Override

@@ -1,22 +1,18 @@
 package oop.project;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import layout.ButtonBase;
-import layout.ButtonModeEnum.buttonModeEnum;
-import layout.ButtonModeEnum;
+import oop.project.object.button.ButtonFactory;
+import oop.project.object.button.ButtonMode.buttonModeEnum;
 import oop.project.object.listener.LineListener;
 import oop.project.object.listener.ManuBarListener;
 import oop.project.object.listener.ObjectListener;
 import oop.project.object.listener.SelectListener;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -60,28 +56,60 @@ public class UmlEditor {
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.WEST);
+		
 		panel.setLayout(new GridLayout(6, 0, 0, 0));
-
-		ButtonBase selectButton = new ButtonBase("select", ButtonModeEnum.buttonModeEnum.selectMode);
-		panel.add(selectButton);
-
-		ButtonBase associationLineButton = new ButtonBase("association line",
-				ButtonModeEnum.buttonModeEnum.associationLineMode);
-		panel.add(associationLineButton);
-
-		ButtonBase generalizationLineButton = new ButtonBase("generalization line",
-				ButtonModeEnum.buttonModeEnum.generalizationLineMode);
-		panel.add(generalizationLineButton);
-
-		ButtonBase compositionLineButton = new ButtonBase("composition line",
-				ButtonModeEnum.buttonModeEnum.compositionLineMode);
-		panel.add(compositionLineButton);
-
-		ButtonBase classButton = new ButtonBase("class", ButtonModeEnum.buttonModeEnum.classMode);
-		panel.add(classButton);
-
-		ButtonBase useCaseButton = new ButtonBase("use case", ButtonModeEnum.buttonModeEnum.useCaseMode);
-		panel.add(useCaseButton);
+		
+		ButtonFactory bFactory=new ButtonFactory(panel);
+		bFactory.addButton(buttonModeEnum.selectMode);
+		bFactory.addButton(buttonModeEnum.associationLineMode);
+		bFactory.addButton(buttonModeEnum.generalizationLineMode);
+		bFactory.addButton(buttonModeEnum.compositionLineMode);
+		bFactory.addButton(buttonModeEnum.classMode);
+		bFactory.addButton(buttonModeEnum.useCaseMode);
+		bFactory.addButtonListener();
+//		ButtonBase selectButton = new ButtonBase(ButtonMode.buttonModeEnum.selectMode);
+//		panel.add(selectButton);
+//
+//		ButtonBase associationLineButton = new ButtonBase(ButtonMode.buttonModeEnum.associationLineMode);
+//		panel.add(associationLineButton);
+//
+//		ButtonBase generalizationLineButton = new ButtonBase(ButtonMode.buttonModeEnum.generalizationLineMode);
+//		panel.add(generalizationLineButton);
+//
+//		ButtonBase compositionLineButton = new ButtonBase(ButtonMode.buttonModeEnum.compositionLineMode);
+//		panel.add(compositionLineButton);
+//
+//		ButtonBase classButton = new ButtonBase(ButtonMode.buttonModeEnum.classMode);
+//		panel.add(classButton);
+//
+//		ButtonBase useCaseButton = new ButtonBase(ButtonMode.buttonModeEnum.useCaseMode);
+//		panel.add(useCaseButton);
+//		SharedObject.getInstance().buttomList.add(selectButton);
+//		SharedObject.getInstance().buttomList.add(associationLineButton);
+//		SharedObject.getInstance().buttomList.add(generalizationLineButton);
+//		SharedObject.getInstance().buttomList.add(compositionLineButton);
+//		SharedObject.getInstance().buttomList.add(classButton);
+//		SharedObject.getInstance().buttomList.add(useCaseButton);
+//		for (JButton buttonSelected : SharedObject.getInstance().buttomList) {
+//			buttonSelected.addActionListener(new ActionListener() {
+//
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					SharedObject.getInstance().resetSelected();
+//					for (JButton jbutton : SharedObject.getInstance().buttomList) {
+//						jbutton.setBackground(Color.lightGray);
+//						jbutton.setForeground(Color.black);
+//					}
+//					buttonSelected.setBackground(Color.black);
+//					buttonSelected.setForeground(Color.white);
+//					ButtonMode.getInstance().setMode(
+//							buttonModeEnum.values()[SharedObject.getInstance().buttomList.indexOf(buttonSelected)]);
+//					// debug
+//					System.out.println(ButtonMode.getInstance().getMode().name());
+//				}
+//			});
+//
+//		}
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -93,7 +121,7 @@ public class UmlEditor {
 		menuBar.add(editButton);
 
 		ManuBarListener mbl = new ManuBarListener();
-		
+
 		JMenuItem groupButton = new JMenuItem("group");
 		groupButton.addActionListener(mbl);
 		editButton.add(groupButton);
@@ -106,7 +134,7 @@ public class UmlEditor {
 		changeNameButton.addActionListener(mbl);
 		editButton.add(changeNameButton);
 
-		DrawPanel layeredPane = new DrawPanel();
+		DrawPanel layeredPanel = new DrawPanel();
 
 //		UseCaseObject test=new UseCaseObject(50, 52, 70,50, true, "sadawd");
 //		SharedObject.shapes.add(test);
@@ -122,40 +150,16 @@ public class UmlEditor {
 //		layeredPane.add(test2);
 //		SharedObject.lines.add(test3);
 
-		frame.getContentPane().add(layeredPane, BorderLayout.CENTER);
-		SharedObject.getInstance().buttomList.add(selectButton);
-		SharedObject.getInstance().buttomList.add(associationLineButton);
-		SharedObject.getInstance().buttomList.add(generalizationLineButton);
-		SharedObject.getInstance().buttomList.add(compositionLineButton);
-		SharedObject.getInstance().buttomList.add(classButton);
-		SharedObject.getInstance().buttomList.add(useCaseButton);
-		for (JButton buttonSelected : SharedObject.getInstance().buttomList) {
-			buttonSelected.addActionListener(new ActionListener() {
+		frame.getContentPane().add(layeredPanel, BorderLayout.CENTER);
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					SharedObject.getInstance().resetSelected();
-					for (JButton jbutton : SharedObject.getInstance().buttomList) {
-						jbutton.setBackground(Color.lightGray);
-						jbutton.setForeground(Color.black);
-					}
-					buttonSelected.setBackground(Color.black);
-					buttonSelected.setForeground(Color.white);
-					ButtonModeEnum.getInstance().setMode(buttonModeEnum.values()[SharedObject.getInstance().buttomList.indexOf(buttonSelected)]); 
-					// debug
-					System.out.println(ButtonModeEnum.getInstance().getMode().name());
-				}
-			});
-
-		}
-		layeredPane.addMouseListener(new ObjectListener());
-		layeredPane.addMouseListener(new LineListener());
+		layeredPanel.addMouseListener(new ObjectListener());
+		layeredPanel.addMouseListener(new LineListener());
 		SelectListener SL = new SelectListener();
-		layeredPane.addMouseListener(SL);
-		layeredPane.addMouseMotionListener(SL);
+		layeredPanel.addMouseListener(SL);
+		layeredPanel.addMouseMotionListener(SL);
 
 		SharedObject.getInstance().setFrameJPanel(panel);
-		SharedObject.getInstance().setDrawPanel(layeredPane);
+		SharedObject.getInstance().setDrawPanel(layeredPanel);
 
 	}
 

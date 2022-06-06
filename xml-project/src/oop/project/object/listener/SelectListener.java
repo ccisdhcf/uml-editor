@@ -4,8 +4,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import layout.ButtonModeEnum;
-import layout.ButtonModeEnum.buttonModeEnum;
+import oop.project.object.button.ButtonMode;
+
 import oop.project.SharedObject;
 import oop.project.object.ObjectBase;
 import oop.project.object.line.LineBase;
@@ -39,7 +39,7 @@ public class SelectListener extends MouseAdapter {
 		// TODO Auto-generated method stub
 		
 		IsPressPointAObj = false;
-		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.selectMode) {
+		if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.selectMode) {
 			SharedObject.getInstance().resetSelected();
 
 			for (ObjectBase ob : SharedObject.getInstance().shapes) {
@@ -73,7 +73,7 @@ public class SelectListener extends MouseAdapter {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (ButtonModeEnum.getInstance().getMode() == ButtonModeEnum.buttonModeEnum.selectMode && !IsPressPointAObj) {
+		if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.selectMode && !IsPressPointAObj) {
 			selectAreaDes = new Point(e.getPoint());
 			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.inArea(selectAreaSrc, selectAreaDes)) {
@@ -106,7 +106,7 @@ public class SelectListener extends MouseAdapter {
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-		if (ButtonModeEnum.getInstance().getMode()== ButtonModeEnum.buttonModeEnum.selectMode) {
+		if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.selectMode) {
 			if (shapeShift != null && objectBase != null) {
 //				for (ObjectBase ob : SharedObject.shapes) {
 //				if (ob.checkBorder(e.getX(), e.getY())) {
