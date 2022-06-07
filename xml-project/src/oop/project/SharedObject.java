@@ -10,7 +10,7 @@ import oop.project.object.SelectAreaObject;
 import oop.project.object.line.LineBase;
 
 public class SharedObject {
-
+	// singleton
 	private static SharedObject instance;
 
 	private SharedObject() {
@@ -23,40 +23,36 @@ public class SharedObject {
 		return instance;
 	}
 
-	public  ArrayList<JButton> buttomList = new ArrayList<>();
-	public  ArrayList<ObjectBase> shapes = new ArrayList<>();
-	public  ArrayList<LineBase> lines = new ArrayList<>();
-
-	
-
+	public ArrayList<JButton> buttomList = new ArrayList<>();
+	public ArrayList<ObjectBase> shapes = new ArrayList<>();
+	public ArrayList<LineBase> lines = new ArrayList<>();
 
 	private static JPanel frameJPanel;
 	private static DrawPanel drawPanel;
-
 
 	static public void init() {
 	}
 
 	public SelectAreaObject sao = new SelectAreaObject();
 
-	public  DrawPanel getDrawPanel() {
+	public DrawPanel getDrawPanel() {
 		return drawPanel;
 	}
 
-	public  JPanel getFrameJPanel() {
+	public JPanel getFrameJPanel() {
 		return frameJPanel;
 	}
 
-	public  void setDrawPanel(DrawPanel _dp) {
+	public void setDrawPanel(DrawPanel _dp) {
 		drawPanel = _dp;
 
 	}
 
-	public  void setFrameJPanel(JPanel _frame) {
+	public void setFrameJPanel(JPanel _frame) {
 		frameJPanel = _frame;
 	}
 
-	public  void resetSelected() {
+	public void resetSelected() {
 		for (ObjectBase shape : shapes) {
 			shape.setSelected(false);
 		}

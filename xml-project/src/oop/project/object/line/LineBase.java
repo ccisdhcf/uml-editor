@@ -36,12 +36,12 @@ public abstract class LineBase extends JComponent {
 //		srcPositionY = 0;
 //		desPositionX = 0;
 //		desPositionY = 0;
-		srcPosition.setLocation(0, 0);
-		desPosition.setLocation(0, 0);
-		srcUUID=null;
-		desUUID=null;
-		srcPort=port.nullMode;
-		desPort=port.nullMode;
+		srcPosition = new Point(0, 0);
+		desPosition = new Point(0, 0);
+		srcUUID = null;
+		desUUID = null;
+		srcPort = port.nullMode;
+		desPort = port.nullMode;
 		selected = false;
 		type = ButtonMode.buttonModeEnum.nullMode;
 	}
@@ -52,21 +52,25 @@ public abstract class LineBase extends JComponent {
 //		srcPositionY = _srcPositionY;
 //		desPositionX = _desPositionX;
 //		desPositionY = _desPositionY;
-		srcPosition.setLocation(_srcPositionX,_srcPositionY);
-		desPosition.setLocation(_desPositionX, _desPositionY);
-		type = _type;
-		selected = _selected;
-	}	
-	public LineBase(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort, boolean _selected,
-			ButtonMode.buttonModeEnum _type) {
-		srcUUID=_srcUUID;
-		desUUID=_desUUID;
-		srcPort=_srcPort;
-		desPort=_desPort;
-		getPosFromUUID(srcUUID, desUUID, srcPort, desPort,SharedObject.getInstance().shapes);
+		srcPosition = new Point(_srcPositionX, _srcPositionY);
+		desPosition = new Point(_desPositionX, _desPositionY);
+
 		type = _type;
 		selected = _selected;
 	}
+
+	// use uuid to create line
+	public LineBase(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,
+			boolean _selected, ButtonMode.buttonModeEnum _type) {
+		srcUUID = _srcUUID;
+		desUUID = _desUUID;
+		srcPort = _srcPort;
+		desPort = _desPort;
+		getPosFromUUID(srcUUID, desUUID, srcPort, desPort, SharedObject.getInstance().shapes);
+		type = _type;
+		selected = _selected;
+	}
+
 //	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort) {
 //		for (ObjectBase ob:SharedObject.shapes) {
 //			if (ob.getUUID().equals(_srcUUID)) {
@@ -79,24 +83,25 @@ public abstract class LineBase extends JComponent {
 //			}
 //		}
 //	}
-	public void getPosFromUUID(String _srcUUID,String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,ArrayList<ObjectBase> _obList) {
-		for (ObjectBase ob:_obList) {
+	public void getPosFromUUID(String _srcUUID, String _desUUID, ObjectBase.port _srcPort, ObjectBase.port _desPort,
+			ArrayList<ObjectBase> _obList) {
+		for (ObjectBase ob : _obList) {
 			if (ob.getUUID().equals(_srcUUID)) {
 //				srcPositionX=(int) ob.getPortPos(_srcPort).getX();
 //				srcPositionY=(int) ob.getPortPos(_srcPort).getY();
-				srcPosition=ob.getPortPos(_srcPort);
+				srcPosition = new Point(ob.getPortPos(_srcPort));
 //				srcPositionX=ob.getPortPosX(_srcPort);
 //				srcPositionY=ob.getPortPosY(_srcPort);
-			}
-			else if (ob.getUUID().equals(_desUUID)) {
+			} else if (ob.getUUID().equals(_desUUID)) {
 //				desPositionX=(int) ob.getPortPos(_desPort).getX();
 //				desPositionY=(int) ob.getPortPos(_desPort).getY();
-				desPosition=ob.getPortPos(_desPort);
+				desPosition = new Point(ob.getPortPos(_desPort));
 //				desPositionX=ob.getPortPosX(_desPort);
 //				desPositionY=ob.getPortPosY(_desPort);
 			}
 		}
 	}
+
 	public void setSrcPosition(int _srcX, int _srcY) {
 //		srcPositionX = _srcX;
 //		srcPositionY = _srcY;
@@ -120,12 +125,15 @@ public abstract class LineBase extends JComponent {
 	public boolean getSelected() {
 		return selected;
 	}
+
 	public Point getSrcPos() {
 		return srcPosition;
 	}
+
 	public Point getDesPos() {
 		return desPosition;
 	}
+
 //	public int getSrcPosX() {
 //		return srcPositionX;
 //	}
@@ -144,15 +152,19 @@ public abstract class LineBase extends JComponent {
 	public String getSrcUUID() {
 		return srcUUID;
 	}
+
 	public String getDesUUID() {
 		return desUUID;
 	}
+
 	public ObjectBase.port getSrcPort() {
 		return srcPort;
 	}
+
 	public ObjectBase.port getDesPort() {
 		return desPort;
 	}
+
 	public ButtonMode.buttonModeEnum getType() {
 		return type;
 	}
@@ -167,10 +179,13 @@ public abstract class LineBase extends JComponent {
 			return false;
 		}
 	}
+
 	public abstract void printObject(Graphics g);
+
 	public void paintBorder(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.drawRect((int)srcPosition.getX(),(int) srcPosition.getY(),(int)( desPosition.getX()-srcPosition.getX()),(int)( desPosition.getY()-srcPosition.getY()));
+		g.drawRect((int) srcPosition.getX(), (int) srcPosition.getY(), (int) (desPosition.getX() - srcPosition.getX()),
+				(int) (desPosition.getY() - srcPosition.getY()));
 	}
 
 	@Override

@@ -22,11 +22,11 @@ public class UseCaseObject extends ObjectBase {
 
 	@Override
 	public void paintObject(Graphics g) {
-		int inset=2;
+		int inset = 2;
 		g.setColor(Color.black);
 		g.drawOval(getPosX(), getPosY(), getObjectWidth(), getObjectHeight());
 		g.setColor(Color.white);
-		g.fillOval(getX()+inset, getY()+inset, getWidth()-inset*2, getHeight()-inset*2);
+		g.fillOval(getX() + inset, getY() + inset, getWidth() - inset * 2, getHeight() - inset * 2);
 		// System.out.println(getPosX()+" "+getPosY()+" "+ getObjectWidth()+"
 		// "+getObjectHeight());
 
@@ -41,6 +41,6 @@ public class UseCaseObject extends ObjectBase {
 	@Override
 	public void ungroup() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

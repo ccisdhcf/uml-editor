@@ -45,11 +45,13 @@ public class GeneralizationLine extends LineBase {
 				(int) (getDesPos().getX() + sign * (arrowX + arrowX2) / 2),
 				(int) (getDesPos().getY() + sign * (arrowY + arrowY2) / 2));
 
-		g.drawLine((int)getDesPos().getX(), (int)getDesPos().getY(),(int)( getDesPos().getX() + sign * arrowX),(int)( getDesPos().getY() + sign * arrowY));
+		g.drawLine((int) getDesPos().getX(), (int) getDesPos().getY(), (int) (getDesPos().getX() + sign * arrowX),
+				(int) (getDesPos().getY() + sign * arrowY));
 
-		g.drawLine((int)getDesPos().getX(),(int) getDesPos().getY(),(int) (getDesPos().getX() + sign * arrowX2),(int)( getDesPos().getY() + sign * arrowY2));
-		g.drawLine((int)(getDesPos().getX() + sign * arrowX),(int)( getDesPos().getY() + sign * arrowY),(int)( getDesPos().getX() + sign * arrowX2),
-				(int)(getDesPos().getY() + sign * arrowY2));
+		g.drawLine((int) getDesPos().getX(), (int) getDesPos().getY(), (int) (getDesPos().getX() + sign * arrowX2),
+				(int) (getDesPos().getY() + sign * arrowY2));
+		g.drawLine((int) (getDesPos().getX() + sign * arrowX), (int) (getDesPos().getY() + sign * arrowY),
+				(int) (getDesPos().getX() + sign * arrowX2), (int) (getDesPos().getY() + sign * arrowY2));
 
 	}
 

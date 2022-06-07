@@ -37,7 +37,7 @@ public class SelectListener extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 		IsPressPointAObj = false;
 		if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.selectMode) {
 			SharedObject.getInstance().resetSelected();
@@ -62,8 +62,8 @@ public class SelectListener extends MouseAdapter {
 
 				SharedObject.getInstance().getSao().setSrc(e.getPoint());
 				SharedObject.getInstance().getSao().setDes(e.getPoint());
-				System.out.println(
-						" " + SharedObject.getInstance().getSao().getSrc().x + " " + SharedObject.getInstance().getSao().getSrc().y + " " + shapeShift);
+				System.out.println(" " + SharedObject.getInstance().getSao().getSrc().x + " "
+						+ SharedObject.getInstance().getSao().getSrc().y + " " + shapeShift);
 			}
 		}
 
@@ -106,7 +106,7 @@ public class SelectListener extends MouseAdapter {
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-		if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.selectMode) {
+		if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.selectMode) {
 			if (shapeShift != null && objectBase != null) {
 //				for (ObjectBase ob : SharedObject.shapes) {
 //				if (ob.checkBorder(e.getX(), e.getY())) {
@@ -120,12 +120,13 @@ public class SelectListener extends MouseAdapter {
 				int _y = e.getPoint().y - shapeShift.y;
 				// BeforeDragPoint=new Point(objectBase.getPosX(),objectBase.getPosY());
 				objectBase.setPosition(objBeforeDragPoint.x + _x, objBeforeDragPoint.y + _y);
-				//objectBase.shiftObject(_x, _y);
+				// objectBase.shiftObject(_x, _y);
 
 //			System.out.println("select drag " + e.getPoint().x + " " + e.getPoint().y + " " + shapeShift.x + " "
 //					+ shapeShift.y + " " + objectBase.getPosX() + " " + objectBase.getPosY() + " ");
 				for (LineBase lb : SharedObject.getInstance().lines) {
-					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(),SharedObject.getInstance().shapes);
+					lb.getPosFromUUID(lb.getSrcUUID(), lb.getDesUUID(), lb.getSrcPort(), lb.getDesPort(),
+							SharedObject.getInstance().shapes);
 				}
 				SharedObject.getInstance().getDrawPanel().repaint();
 			} else if (!IsPressPointAObj) {

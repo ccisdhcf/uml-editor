@@ -56,7 +56,7 @@ public class LineListener implements MouseListener {
 				if (ob.checkBorder(srcX, srcY)) {
 					srcUUID = ob.getUUID();
 					srcPort = ob.getNearestPort(srcX, srcY);
-					isSrcGroup=ob.getIsGroup();
+					isSrcGroup = ob.getIsGroup();
 				}
 			}
 		}
@@ -71,16 +71,16 @@ public class LineListener implements MouseListener {
 				|| ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.generalizationLineMode) {
 			desX = e.getX();
 			desY = e.getY();
-			desUUID="";
+			desUUID = "";
 			for (ObjectBase ob : SharedObject.getInstance().shapes) {
 				if (ob.checkBorder(desX, desY)) {
 					desUUID = ob.getUUID();
 					desPort = ob.getNearestPort(desX, desY);
-					isDesGroup=ob.getIsGroup();
+					isDesGroup = ob.getIsGroup();
 				}
 			}
 			LineBase newLine;
-			if (srcUUID!=desUUID&&!isSrcGroup&&!isDesGroup&&desUUID!="") {
+			if (srcUUID != desUUID && !isSrcGroup && !isDesGroup && desUUID != "") {
 				switch (ButtonMode.getInstance().getMode()) {
 				case associationLineMode: {
 					newLine = new AssociationLine(srcUUID, desUUID, srcPort, desPort, false,
@@ -104,7 +104,7 @@ public class LineListener implements MouseListener {
 				SharedObject.getInstance().lines.add(newLine);
 				SharedObject.getInstance().getDrawPanel().repaint();
 			}
-		
+
 		}
 		// TODO Auto-generated method stub
 

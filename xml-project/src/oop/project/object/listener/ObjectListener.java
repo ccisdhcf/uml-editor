@@ -15,15 +15,22 @@ public class ObjectListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.classMode
+		if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.classMode
 				|| ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.useCaseMode) {
-			String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
-//			System.out.println(e.getX() + " " + e.getY() + " " + name + " " + SharedObject.buttonModeSelected);
-			ObjectBase newObject = null;
-			if (ButtonMode.getInstance().getMode()== ButtonMode.buttonModeEnum.classMode) {
-				newObject = new ClassObject(e.getX(), e.getY(), 50, 50, false, name);
-			} else if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.useCaseMode) {
-				newObject = new UseCaseObject(e.getX(), e.getY(), 50, 30, false, name);
+			String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name",
+					3);
+			//debug
+			System.out.println(e.getX() + " " + e.getY() + " " + name + " " + ButtonMode.getInstance().getMode());
+
+			if (name != null) {
+				ObjectBase newObject = null;
+				if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.classMode) {
+					newObject = new ClassObject(e.getX(), e.getY(), 50, 50, false, name);
+				} else if (ButtonMode.getInstance().getMode() == ButtonMode.buttonModeEnum.useCaseMode) {
+					newObject = new UseCaseObject(e.getX(), e.getY(), 50, 30, false, name);
+				}
+				SharedObject.getInstance().shapes.add(newObject);
+				SharedObject.getInstance().getDrawPanel().repaint();
 			}
 //			newObject.addMouseListener(new SelectListener());
 //			System.out.println("eeeee");
@@ -34,10 +41,8 @@ public class ObjectListener implements MouseListener {
 //			ObjectSelectListener osl=new ObjectSelectListener();
 //			newObject.addMouseListener(osl);
 //			newObject.addMouseMotionListener(osl);
-			SharedObject.getInstance().shapes.add(newObject);
 //			ListenerManager.removeAllMouseEvent(new ArrayList<JComponent>(SharedObject.shapes));
 //			ListenerManager.addAllMouseEvent(new ArrayList<JComponent>(SharedObject.shapes), new Ob );
-			SharedObject.getInstance().getDrawPanel().repaint();
 		}
 
 		// SharedObject.getDrawPanel().repaint();

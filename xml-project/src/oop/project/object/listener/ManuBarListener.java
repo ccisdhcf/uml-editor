@@ -20,10 +20,11 @@ public class ManuBarListener implements ActionListener {
 			switch (e.getActionCommand()) {
 			case "group": {
 
-				String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
+				String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name",
+						"name", 3);
 				if (name != null) {
 					ObjectBase ob = new GroupObject(name);
-					SharedObject.getInstance().shapes.add(0,ob);
+					SharedObject.getInstance().shapes.add(0, ob);
 					SharedObject.getInstance().getSao().setSrc(new Point(0, 0));
 					SharedObject.getInstance().getSao().setDes(new Point(0, 0));
 //				System.out.println(e.getActionCommand());
@@ -49,7 +50,8 @@ public class ManuBarListener implements ActionListener {
 			case "change name": {
 				for (ObjectBase ob : SharedObject.getInstance().shapes) {
 					if (ob.getSelectedStatic()) {
-						String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(), "enter name", "name", 3);
+						String name = JOptionPane.showInputDialog(SharedObject.getInstance().getDrawPanel(),
+								"enter name", "name", 3);
 						ob.setName(name);
 						break;
 					}

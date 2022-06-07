@@ -5,9 +5,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
-
-import javax.swing.JOptionPane;
-
 import oop.project.SharedObject;
 import oop.project.object.line.LineBase;
 
@@ -30,10 +27,12 @@ public class GroupObject extends ObjectBase {
 		allObjects = null;
 	}
 
-	public GroupObject(String _name /*ArrayList<LineBase> _allLines,
-			ArrayList<ObjectBase> _allObjects ,ArrayList<GroupObject> _allGroupedObjects */) {
+	public GroupObject(String _name /*
+									 * ArrayList<LineBase> _allLines, ArrayList<ObjectBase> _allObjects
+									 * ,ArrayList<GroupObject> _allGroupedObjects
+									 */) {
 		super(); // object Init constructor,only have uuid
-		
+
 		Point minPos = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
 		Point maxPos = new Point(Integer.MIN_VALUE, Integer.MIN_VALUE);
 //		for (LineBase lb : _allLines) {
@@ -61,7 +60,6 @@ public class GroupObject extends ObjectBase {
 				if ((ob.getPosY() + ob.getObjectHeight()) > maxPos.y) {
 					maxPos.setLocation(maxPos.x, (ob.getPosY() + ob.getObjectHeight()));
 				}
-			
 
 			}
 		}
@@ -86,7 +84,7 @@ public class GroupObject extends ObjectBase {
 //				}
 //			}
 //		}
-		
+
 		setName(_name);
 		objPoint.setLocation(minPos);
 		for (ObjectBase ob : allObjects) {
@@ -97,8 +95,7 @@ public class GroupObject extends ObjectBase {
 		setWidth(maxPos.x - minPos.x);
 		setHeight(maxPos.y - minPos.y);
 		setIsGroup(true);
-		
-	
+
 		SharedObject.getInstance().getDrawPanel().repaint();
 
 	}
@@ -118,11 +115,11 @@ public class GroupObject extends ObjectBase {
 
 	@Override
 	public void setPosition(int x, int y) {
-		
+
 		super.setPosition(x, y);
-		for(ObjectBase ob:allObjects) {
-			int index=allObjects.indexOf(ob);
-			ob.setPosition(x+allObjectShift.get(index).x, y+allObjectShift.get(index).y);
+		for (ObjectBase ob : allObjects) {
+			int index = allObjects.indexOf(ob);
+			ob.setPosition(x + allObjectShift.get(index).x, y + allObjectShift.get(index).y);
 		}
 //		for (ObjectBase ob : allObjects) {
 //			System.out.println("index: " + allObjects.indexOf(ob)+" "+allObjects.size());

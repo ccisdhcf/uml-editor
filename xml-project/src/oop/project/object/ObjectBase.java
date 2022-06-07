@@ -32,7 +32,7 @@ public abstract class ObjectBase extends JComponent {
 	 */
 
 	public ObjectBase() {
-		position.setLocation(0, 0);
+		position = new Point(0, 0);
 		;
 
 		width = 0;
@@ -46,7 +46,7 @@ public abstract class ObjectBase extends JComponent {
 	public ObjectBase(int _positionX, int _positionY, int _width, int _height, boolean _selected, String _name) {
 //		positionX = _positionX;
 //		positionY = _positionY;
-		position.setLocation(_positionX, _positionY);
+		position = new Point(_positionX, _positionY);
 		width = _width;
 		height = _height;
 		selected = _selected;
@@ -158,7 +158,7 @@ public abstract class ObjectBase extends JComponent {
 	}
 
 	public Point getPortPos(port p) {
-		Point point = null;
+		Point point = new Point();
 		switch (p) {
 		case up: {
 			point.setLocation(position.getX() + width / 2, position.getY());
@@ -270,6 +270,7 @@ public abstract class ObjectBase extends JComponent {
 		}
 
 	}
-
+	
+	// Percolating 	up
 	public abstract void ungroup();
 }

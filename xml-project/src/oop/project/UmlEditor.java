@@ -1,7 +1,6 @@
 package oop.project;
 
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,10 +55,8 @@ public class UmlEditor {
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.WEST);
-		
-		panel.setLayout(new GridLayout(6, 0, 0, 0));
-		
-		ButtonFactory bFactory=new ButtonFactory(panel);
+
+		ButtonFactory bFactory = new ButtonFactory(panel);
 		bFactory.addButton(buttonModeEnum.selectMode);
 		bFactory.addButton(buttonModeEnum.associationLineMode);
 		bFactory.addButton(buttonModeEnum.generalizationLineMode);
@@ -67,6 +64,7 @@ public class UmlEditor {
 		bFactory.addButton(buttonModeEnum.classMode);
 		bFactory.addButton(buttonModeEnum.useCaseMode);
 		bFactory.addButtonListener();
+
 //		ButtonBase selectButton = new ButtonBase(ButtonMode.buttonModeEnum.selectMode);
 //		panel.add(selectButton);
 //

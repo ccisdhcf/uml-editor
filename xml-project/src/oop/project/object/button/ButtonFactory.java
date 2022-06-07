@@ -1,12 +1,12 @@
 package oop.project.object.button;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 
 import oop.project.SharedObject;
 import oop.project.object.button.ButtonMode.buttonModeEnum;
@@ -16,6 +16,8 @@ public class ButtonFactory {
 
 	public ButtonFactory(JPanel _JPanel) {
 		setPanel(_JPanel);
+		// gridLayout 6->total button number
+		_JPanel.setLayout(new GridLayout(6, 0, 0, 0));
 	}
 
 	public JPanel getPanel() {
@@ -26,6 +28,7 @@ public class ButtonFactory {
 		this.panel = panel;
 	}
 
+	// add button to panel,then add to list
 	public void addButton(ButtonMode.buttonModeEnum _mode) {
 		ButtonBase _ButtonBase;
 		switch (_mode) {
@@ -61,6 +64,7 @@ public class ButtonFactory {
 		SharedObject.getInstance().buttomList.add(_ButtonBase);
 	}
 
+	// add listener to all button in list
 	public void addButtonListener() {
 		for (JButton buttonSelected : SharedObject.getInstance().buttomList) {
 			buttonSelected.addActionListener(new ActionListener() {
